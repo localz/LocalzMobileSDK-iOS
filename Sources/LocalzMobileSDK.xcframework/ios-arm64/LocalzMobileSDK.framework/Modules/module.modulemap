@@ -1,0 +1,11 @@
+framework module LocalzMobileSDK {
+  umbrella header "LocalzMobileSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module LocalzMobileSDK.Swift {
+    header "LocalzMobileSDK-Swift.h"
+    requires objc
+}

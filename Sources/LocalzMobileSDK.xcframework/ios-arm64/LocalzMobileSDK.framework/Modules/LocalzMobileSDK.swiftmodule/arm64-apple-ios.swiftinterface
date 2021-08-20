@@ -1,0 +1,3718 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LocalzMobileSDK
+import Apollo
+import CoreLocation
+import CoreMotion
+import Foundation
+@_exported import LocalzMobileSDK
+import Network
+import Swift
+import UIKit
+import UserNotifications
+@_hasMissingDesignatedInitializers public class AssignedOrderListListener {
+  public func start()
+  public func stop()
+  @objc deinit
+}
+public enum PermissionStatus : Swift.String {
+  case AUTHORIZED
+  case WHENINUSE
+  case DENIED
+  case DISABLED
+  case NOTDETERMINED
+  case UNKNOWN
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum CapabilityType : Swift.String {
+  case LOCATION
+  case MOTION
+  case NOTIFICATION
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public class BackgroundClient {
+  public static let BackgroundLocationStatusUpdated: Foundation.Notification.Name
+  public static let BackgroundLocationStatusUpdateError: Foundation.Notification.Name
+  public static var shared: LocalzMobileSDK.BackgroundClient
+  public var isInitialized: Swift.Bool {
+    get
+  }
+  public init()
+  @objc deinit
+  public func isOnDuty() -> Swift.Bool
+  public func onDuty(_ onDuty: Swift.Bool) throws
+}
+public enum Environment {
+  case DEV, PRD
+  public static func == (a: LocalzMobileSDK.Environment, b: LocalzMobileSDK.Environment) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension DateFormatter {
+  public static let hourDateFormatter: Foundation.DateFormatter
+}
+public struct MessageResult {
+  public var hasPrevious: Swift.Bool
+  public var previous: Swift.String?
+  public var hasNext: Swift.Bool
+  public var next: Swift.String?
+  public var messages: [LocalzMobileSDK.MessageData]?
+  public var totalDocs: Swift.Double
+  public var fromMessageId: Swift.String?
+}
+public struct ChatChannelMessages {
+  public var chatChannel: LocalzMobileSDK.ChatChannel
+  public var messages: [LocalzMobileSDK.MessageData]
+  public var totalDocs: Swift.Int
+  public func getMessages()
+}
+@_hasMissingDesignatedInitializers public class RLog {
+  public static let shared: LocalzMobileSDK.RLog
+  public static func log(_ type: LocalzMobileSDK.RLog.Log, _ logText: Swift.String?)
+  public static func debug(_ logText: Swift.String?)
+  public static func debugError(_ logText: Swift.String?)
+  public enum Log : Swift.String {
+    case DEBUG
+    case INFO
+    case ERROR
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  @objc deinit
+}
+public class MobileClient {
+  public static let NetworkStatusChange: Foundation.Notification.Name
+  public static let PermissionUpdated: Foundation.Notification.Name
+  public static let SessionLoggedOut: Foundation.Notification.Name
+  public static let SDKStateUpdate: Foundation.Notification.Name
+  public static let version: Swift.String
+  public static let shared: LocalzMobileSDK.MobileClient
+  public var enableOnDutyStatusLocalPush: Swift.Bool
+  public enum AppType {
+    case BackgroundApp
+    case ChatMyWay
+    case Both
+    public static func == (a: LocalzMobileSDK.MobileClient.AppType, b: LocalzMobileSDK.MobileClient.AppType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum SDKState {
+    case UNINITIALIZED
+    case INITIALIZED
+    case LOGGED_IN
+    case ON_DUTY
+    public static func == (a: LocalzMobileSDK.MobileClient.SDKState, b: LocalzMobileSDK.MobileClient.SDKState) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var sdkState: LocalzMobileSDK.MobileClient.SDKState {
+    get
+  }
+  public enum NetworkState {
+    case OK
+    case ERROR
+    public static func == (a: LocalzMobileSDK.MobileClient.NetworkState, b: LocalzMobileSDK.MobileClient.NetworkState) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var appType: LocalzMobileSDK.MobileClient.AppType? {
+    get
+  }
+  public var isInitialized: Swift.Bool {
+    get
+  }
+  public var isBackgroundApp: Swift.Bool {
+    get
+  }
+  public var isChatMyWay: Swift.Bool {
+    get
+  }
+  public var currentNetworkState: LocalzMobileSDK.MobileClient.NetworkState {
+    get
+  }
+  public init()
+  public static func setup(appType: LocalzMobileSDK.MobileClient.AppType = .Both, projectId: Swift.String, attendantKey: Swift.String, pushKey: Swift.String, env: LocalzMobileSDK.Environment = .PRD) throws
+  public static func setup(appType: LocalzMobileSDK.MobileClient.AppType = .Both, key: Swift.String, env: LocalzMobileSDK.Environment = .PRD) throws
+  public func login(username: Swift.String!, password: Swift.String!, registerDevice: Swift.Bool = true, onSuccess: @escaping ((LocalzMobileSDK.CurrentUser) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void)))
+  public func logout()
+  public func currentUser() -> LocalzMobileSDK.CurrentUser?
+  public func shouldAskPermissions() -> [LocalzMobileSDK.CapabilityType]
+  public func registerPushToken(deviceToken: Foundation.Data)
+  public func isNotificationAuthorized() -> Swift.Bool
+  public func notificationPermission() -> LocalzMobileSDK.PermissionStatus
+  public func requestNotificationPermission(_ options: UserNotifications.UNAuthorizationOptions = [.alert, .sound, .badge])
+  public func isLocationAuthorized() -> Swift.Bool
+  public func locationPermission() -> LocalzMobileSDK.PermissionStatus
+  public func requestLocationPermission()
+  public func isDeviceMotionAuthorized() -> Swift.Bool
+  public func deviceMotionPermission() -> LocalzMobileSDK.PermissionStatus
+  public func requestDeviceMotionPermission()
+  public func notificationHandler(userInfo: [Swift.AnyHashable : Any])
+  public func networkChange(onChange: @escaping (LocalzMobileSDK.MobileClient.NetworkState) -> (Swift.Void))
+  public func retrieveBGAppConfig(onSuccess: ((LocalzMobileSDK.BackgroundConfig) -> Swift.Void)!, onFailure: ((Swift.Error) -> Swift.Void)!)
+  @objc deinit
+}
+final public class BackgroundAppFeatureQuery : Apollo.GraphQLQuery {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var projectId: Apollo.GraphQLID
+  final public var version: Swift.String
+  public init(projectId: Apollo.GraphQLID, version: Swift.String)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(backgroundAppFeature: LocalzMobileSDK.BackgroundAppFeatureQuery.Data.BackgroundAppFeature? = nil)
+    public var backgroundAppFeature: LocalzMobileSDK.BackgroundAppFeatureQuery.Data.BackgroundAppFeature? {
+      get
+      set
+    }
+    public struct BackgroundAppFeature : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(projectId: Apollo.GraphQLID, version: Swift.String, defaultVersion: Swift.String, createdAt: LocalzMobileSDK.DateTime, updatedAt: LocalzMobileSDK.DateTime, updatedBy: Swift.String? = nil, config: LocalzMobileSDK.BackgroundAppFeatureQuery.Data.BackgroundAppFeature.Config)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var projectId: Apollo.GraphQLID {
+        get
+        set
+      }
+      public var version: Swift.String {
+        get
+        set
+      }
+      public var defaultVersion: Swift.String {
+        get
+        set
+      }
+      public var createdAt: LocalzMobileSDK.DateTime {
+        get
+        set
+      }
+      public var updatedAt: LocalzMobileSDK.DateTime {
+        get
+        set
+      }
+      public var updatedBy: Swift.String? {
+        get
+        set
+      }
+      public var config: LocalzMobileSDK.BackgroundAppFeatureQuery.Data.BackgroundAppFeature.Config {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.BackgroundAppFeatureQuery.Data.BackgroundAppFeature.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var backgroundConfig: LocalzMobileSDK.BackgroundConfig {
+          get
+          set
+        }
+      }
+      public struct Config : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(enableChatMyWay: Swift.Bool)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var enableChatMyWay: Swift.Bool {
+          get
+          set
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+public struct BackgroundConfig : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(projectId: Apollo.GraphQLID, version: Swift.String, defaultVersion: Swift.String, createdAt: LocalzMobileSDK.DateTime, updatedAt: LocalzMobileSDK.DateTime, updatedBy: Swift.String? = nil, config: LocalzMobileSDK.BackgroundConfig.Config)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var projectId: Apollo.GraphQLID {
+    get
+    set
+  }
+  public var version: Swift.String {
+    get
+    set
+  }
+  public var defaultVersion: Swift.String {
+    get
+    set
+  }
+  public var createdAt: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var updatedAt: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var updatedBy: Swift.String? {
+    get
+    set
+  }
+  public var config: LocalzMobileSDK.BackgroundConfig.Config {
+    get
+    set
+  }
+  public struct Config : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(enableChatMyWay: Swift.Bool)
+    public var __typename: Swift.String {
+      get
+      set
+    }
+    public var enableChatMyWay: Swift.Bool {
+      get
+      set
+    }
+  }
+}
+@_hasMissingDesignatedInitializers public class ChatChannelListListener {
+  public func start()
+  public func stop()
+  @objc deinit
+}
+public typealias DateTime = Foundation.Date
+extension Date : Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public init(jsonValue value: Apollo.JSONValue) throws
+  public var jsonValue: Apollo.JSONValue {
+    get
+  }
+}
+public class EventSubscriber {
+  public init(onUpdate: @escaping ((LocalzMobileSDK.EventData) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void)))
+  public func stop()
+  @objc deinit
+}
+public struct GetOrdersInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(dateStart: LocalzMobileSDK.DateTime, dateEnd: LocalzMobileSDK.DateTime, timezone: Swift.String, pageNumber: Swift.Optional<Swift.Double?> = nil, ordersPerPage: Swift.Optional<Swift.Double?> = nil)
+  public var dateStart: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var dateEnd: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var timezone: Swift.String {
+    get
+    set
+  }
+  public var pageNumber: Swift.Optional<Swift.Double?> {
+    get
+    set
+  }
+  public var ordersPerPage: Swift.Optional<Swift.Double?> {
+    get
+    set
+  }
+}
+public struct LoginInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(projectId: Swift.String, cncApiKey: Swift.String, deviceId: Swift.String, username: Swift.String, password: Swift.String, force: Swift.Optional<Swift.Bool?> = nil)
+  public var projectId: Swift.String {
+    get
+    set
+  }
+  public var cncApiKey: Swift.String {
+    get
+    set
+  }
+  public var deviceId: Swift.String {
+    get
+    set
+  }
+  public var username: Swift.String {
+    get
+    set
+  }
+  public var password: Swift.String {
+    get
+    set
+  }
+  public var force: Swift.Optional<Swift.Bool?> {
+    get
+    set
+  }
+}
+public struct RefreshTokenInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(projectId: Swift.String, refreshToken: Swift.String)
+  public var projectId: Swift.String {
+    get
+    set
+  }
+  public var refreshToken: Swift.String {
+    get
+    set
+  }
+}
+public struct LogoutInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(cncApiKey: Swift.String, deviceId: Swift.String)
+  public var cncApiKey: Swift.String {
+    get
+    set
+  }
+  public var deviceId: Swift.String {
+    get
+    set
+  }
+}
+public enum ChatMyWayEvents : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = Swift.String
+  case messageCreated
+  case chatChannelClosed
+  case __unknown(LocalzMobileSDK.ChatMyWayEvents.RawValue)
+  public init?(rawValue: LocalzMobileSDK.ChatMyWayEvents.RawValue)
+  public var rawValue: LocalzMobileSDK.ChatMyWayEvents.RawValue {
+    get
+  }
+  public static func == (lhs: LocalzMobileSDK.ChatMyWayEvents, rhs: LocalzMobileSDK.ChatMyWayEvents) -> Swift.Bool
+  public static var allCases: [LocalzMobileSDK.ChatMyWayEvents] {
+    get
+  }
+  public typealias AllCases = [LocalzMobileSDK.ChatMyWayEvents]
+}
+public struct CreateMessageByOrderNumberInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(orderNumber: Swift.String, subProjectId: Swift.Optional<Swift.String?> = nil, text: Swift.String, correlId: Swift.String)
+  public var orderNumber: Swift.String {
+    get
+    set
+  }
+  public var subProjectId: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var text: Swift.String {
+    get
+    set
+  }
+  public var correlId: Swift.String {
+    get
+    set
+  }
+}
+public struct CreateMessageBySiteIdInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(siteId: Swift.String, text: Swift.String, correlId: Swift.String)
+  public var siteId: Swift.String {
+    get
+    set
+  }
+  public var text: Swift.String {
+    get
+    set
+  }
+  public var correlId: Swift.String {
+    get
+    set
+  }
+}
+public struct DeviceStateInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(deviceId: Swift.String)
+  public var deviceId: Swift.String {
+    get
+    set
+  }
+}
+public struct ConfirmEventInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(deviceId: Swift.String, eventId: Swift.String)
+  public var deviceId: Swift.String {
+    get
+    set
+  }
+  public var eventId: Swift.String {
+    get
+    set
+  }
+}
+public struct GetChannelByChannelIdInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(channelId: Swift.String)
+  public var channelId: Swift.String {
+    get
+    set
+  }
+}
+public struct GetChannelsInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(limit: Swift.Optional<Swift.Double?> = nil, next: Swift.Optional<Apollo.GraphQLID?> = nil, previous: Swift.Optional<Apollo.GraphQLID?> = nil, asc: Swift.Optional<Swift.Bool?> = nil, dateStart: LocalzMobileSDK.DateTime, dateEnd: LocalzMobileSDK.DateTime, timezone: Swift.String, pageNumber: Swift.Optional<Swift.Double?> = nil, ordersPerPage: Swift.Optional<Swift.Double?> = nil, sortBy: Swift.Optional<LocalzMobileSDK.SortingFields?> = nil, searchBy: Swift.Optional<Swift.String?> = nil, deleted: Swift.Optional<Swift.Bool?> = nil, type: Swift.Optional<Swift.String?> = nil)
+  public var limit: Swift.Optional<Swift.Double?> {
+    get
+    set
+  }
+  public var next: Swift.Optional<Apollo.GraphQLID?> {
+    get
+    set
+  }
+  public var previous: Swift.Optional<Apollo.GraphQLID?> {
+    get
+    set
+  }
+  public var asc: Swift.Optional<Swift.Bool?> {
+    get
+    set
+  }
+  public var dateStart: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var dateEnd: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var timezone: Swift.String {
+    get
+    set
+  }
+  public var pageNumber: Swift.Optional<Swift.Double?> {
+    get
+    set
+  }
+  public var ordersPerPage: Swift.Optional<Swift.Double?> {
+    get
+    set
+  }
+  public var sortBy: Swift.Optional<LocalzMobileSDK.SortingFields?> {
+    get
+    set
+  }
+  public var searchBy: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var deleted: Swift.Optional<Swift.Bool?> {
+    get
+    set
+  }
+  public var type: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+}
+public enum SortingFields : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = Swift.String
+  case createdAt
+  case __unknown(LocalzMobileSDK.SortingFields.RawValue)
+  public init?(rawValue: LocalzMobileSDK.SortingFields.RawValue)
+  public var rawValue: LocalzMobileSDK.SortingFields.RawValue {
+    get
+  }
+  public static func == (lhs: LocalzMobileSDK.SortingFields, rhs: LocalzMobileSDK.SortingFields) -> Swift.Bool
+  public static var allCases: [LocalzMobileSDK.SortingFields] {
+    get
+  }
+  public typealias AllCases = [LocalzMobileSDK.SortingFields]
+}
+public struct GetMessagesByChannelIdInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(channelId: Swift.String, limit: Swift.Optional<Swift.Double?> = nil, next: Swift.Optional<Apollo.GraphQLID?> = nil, previous: Swift.Optional<Apollo.GraphQLID?> = nil, asc: Swift.Optional<Swift.Bool?> = nil, messageId: Swift.Optional<Swift.String?> = nil)
+  public var channelId: Swift.String {
+    get
+    set
+  }
+  public var limit: Swift.Optional<Swift.Double?> {
+    get
+    set
+  }
+  public var next: Swift.Optional<Apollo.GraphQLID?> {
+    get
+    set
+  }
+  public var previous: Swift.Optional<Apollo.GraphQLID?> {
+    get
+    set
+  }
+  public var asc: Swift.Optional<Swift.Bool?> {
+    get
+    set
+  }
+  public var messageId: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+}
+public struct SendLocationInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(deviceId: Swift.String, location: LocalzMobileSDK.GeoJsonInput, battery: Swift.Double, batteryStatus: Swift.Int, activeTime: Swift.Double)
+  public var deviceId: Swift.String {
+    get
+    set
+  }
+  public var location: LocalzMobileSDK.GeoJsonInput {
+    get
+    set
+  }
+  public var battery: Swift.Double {
+    get
+    set
+  }
+  public var batteryStatus: Swift.Int {
+    get
+    set
+  }
+  public var activeTime: Swift.Double {
+    get
+    set
+  }
+}
+public struct GeoJsonInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(type: Swift.Optional<Swift.String?> = nil, coordinate: [Swift.Double], altitude: Swift.Double, timestamp: Swift.Double, bearing: Swift.Optional<Swift.Double?> = nil, speed: Swift.Optional<Swift.Double?> = nil, horizontalAccuracy: Swift.Optional<Swift.Double?> = nil, verticalAccuracy: Swift.Optional<Swift.Double?> = nil)
+  public var type: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var coordinate: [Swift.Double] {
+    get
+    set
+  }
+  public var altitude: Swift.Double {
+    get
+    set
+  }
+  public var timestamp: Swift.Double {
+    get
+    set
+  }
+  public var bearing: Swift.Optional<Swift.Double?> {
+    get
+    set
+  }
+  public var speed: Swift.Optional<Swift.Double?> {
+    get
+    set
+  }
+  public var horizontalAccuracy: Swift.Optional<Swift.Double?> {
+    get
+    set
+  }
+  public var verticalAccuracy: Swift.Optional<Swift.Double?> {
+    get
+    set
+  }
+}
+public struct OnDutyInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(deviceId: Swift.String, onDuty: Swift.Bool)
+  public var deviceId: Swift.String {
+    get
+    set
+  }
+  public var onDuty: Swift.Bool {
+    get
+    set
+  }
+}
+public struct RegisterDeviceInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(projectId: Swift.String, cncApiKey: Swift.String, pushApiKey: Swift.String, deviceName: Swift.Optional<Swift.String?> = nil, deviceType: Swift.String, osType: Swift.String, osVersion: Swift.String, lang: Swift.String, locale: Swift.Optional<Swift.String?> = nil, tz: Swift.Optional<Swift.String?> = nil, deviceId: Swift.Optional<Swift.String?> = nil, appTypes: [Swift.String], appId: Swift.Optional<Swift.String?> = nil, appBuild: Swift.Optional<Swift.String?> = nil, appSdk: Swift.Optional<Swift.String?> = nil, appVer: Swift.Optional<Swift.String?> = nil, locEnabled: Swift.Bool, locAuth: Swift.String, bgRefresh: Swift.String, pushToken: Swift.Optional<Swift.String?> = nil, pushTokenEnabled: Swift.Optional<Swift.Bool?> = nil, isSandbox: Swift.Optional<Swift.Bool?> = nil)
+  public var projectId: Swift.String {
+    get
+    set
+  }
+  public var cncApiKey: Swift.String {
+    get
+    set
+  }
+  public var pushApiKey: Swift.String {
+    get
+    set
+  }
+  public var deviceName: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var deviceType: Swift.String {
+    get
+    set
+  }
+  public var osType: Swift.String {
+    get
+    set
+  }
+  public var osVersion: Swift.String {
+    get
+    set
+  }
+  public var lang: Swift.String {
+    get
+    set
+  }
+  public var locale: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var tz: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var deviceId: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var appTypes: [Swift.String] {
+    get
+    set
+  }
+  public var appId: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var appBuild: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var appSdk: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var appVer: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var locEnabled: Swift.Bool {
+    get
+    set
+  }
+  public var locAuth: Swift.String {
+    get
+    set
+  }
+  public var bgRefresh: Swift.String {
+    get
+    set
+  }
+  public var pushToken: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var pushTokenEnabled: Swift.Optional<Swift.Bool?> {
+    get
+    set
+  }
+  public var isSandbox: Swift.Optional<Swift.Bool?> {
+    get
+    set
+  }
+}
+public struct UpdateLastSeenInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(channelId: Swift.String)
+  public var channelId: Swift.String {
+    get
+    set
+  }
+}
+public enum OrderStatusTypes : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = Swift.String
+  case pending
+  case pendingPicked
+  case pendingPacked
+  case pendingAllocated
+  case ready
+  case readyAllocated
+  case unassigned
+  case assigned
+  case handover
+  case complete
+  case failedcomplete
+  case deleted
+  case cancelled
+  case __unknown(LocalzMobileSDK.OrderStatusTypes.RawValue)
+  public init?(rawValue: LocalzMobileSDK.OrderStatusTypes.RawValue)
+  public var rawValue: LocalzMobileSDK.OrderStatusTypes.RawValue {
+    get
+  }
+  public static func == (lhs: LocalzMobileSDK.OrderStatusTypes, rhs: LocalzMobileSDK.OrderStatusTypes) -> Swift.Bool
+  public static var allCases: [LocalzMobileSDK.OrderStatusTypes] {
+    get
+  }
+  public typealias AllCases = [LocalzMobileSDK.OrderStatusTypes]
+}
+public enum ChatChannelTypes : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = Swift.String
+  case order
+  case site
+  case siteuser
+  case __unknown(LocalzMobileSDK.ChatChannelTypes.RawValue)
+  public init?(rawValue: LocalzMobileSDK.ChatChannelTypes.RawValue)
+  public var rawValue: LocalzMobileSDK.ChatChannelTypes.RawValue {
+    get
+  }
+  public static func == (lhs: LocalzMobileSDK.ChatChannelTypes, rhs: LocalzMobileSDK.ChatChannelTypes) -> Swift.Bool
+  public static var allCases: [LocalzMobileSDK.ChatChannelTypes] {
+    get
+  }
+  public typealias AllCases = [LocalzMobileSDK.ChatChannelTypes]
+}
+public enum Resolutions : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = Swift.String
+  case high
+  case off
+  case __unknown(LocalzMobileSDK.Resolutions.RawValue)
+  public init?(rawValue: LocalzMobileSDK.Resolutions.RawValue)
+  public var rawValue: LocalzMobileSDK.Resolutions.RawValue {
+    get
+  }
+  public static func == (lhs: LocalzMobileSDK.Resolutions, rhs: LocalzMobileSDK.Resolutions) -> Swift.Bool
+  public static var allCases: [LocalzMobileSDK.Resolutions] {
+    get
+  }
+  public typealias AllCases = [LocalzMobileSDK.Resolutions]
+}
+public enum ChatChannelClosedReasons : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = Swift.String
+  case orderFailed
+  case orderCompleted
+  case __unknown(LocalzMobileSDK.ChatChannelClosedReasons.RawValue)
+  public init?(rawValue: LocalzMobileSDK.ChatChannelClosedReasons.RawValue)
+  public var rawValue: LocalzMobileSDK.ChatChannelClosedReasons.RawValue {
+    get
+  }
+  public static func == (lhs: LocalzMobileSDK.ChatChannelClosedReasons, rhs: LocalzMobileSDK.ChatChannelClosedReasons) -> Swift.Bool
+  public static var allCases: [LocalzMobileSDK.ChatChannelClosedReasons] {
+    get
+  }
+  public typealias AllCases = [LocalzMobileSDK.ChatChannelClosedReasons]
+}
+public enum ParticipantTypes : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = Swift.String
+  case user
+  case site
+  case __unknown(LocalzMobileSDK.ParticipantTypes.RawValue)
+  public init?(rawValue: LocalzMobileSDK.ParticipantTypes.RawValue)
+  public var rawValue: LocalzMobileSDK.ParticipantTypes.RawValue {
+    get
+  }
+  public static func == (lhs: LocalzMobileSDK.ParticipantTypes, rhs: LocalzMobileSDK.ParticipantTypes) -> Swift.Bool
+  public static var allCases: [LocalzMobileSDK.ParticipantTypes] {
+    get
+  }
+  public typealias AllCases = [LocalzMobileSDK.ParticipantTypes]
+}
+public enum SenderTypes : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = Swift.String
+  case customer
+  case user
+  case me
+  case __unknown(LocalzMobileSDK.SenderTypes.RawValue)
+  public init?(rawValue: LocalzMobileSDK.SenderTypes.RawValue)
+  public var rawValue: LocalzMobileSDK.SenderTypes.RawValue {
+    get
+  }
+  public static func == (lhs: LocalzMobileSDK.SenderTypes, rhs: LocalzMobileSDK.SenderTypes) -> Swift.Bool
+  public static var allCases: [LocalzMobileSDK.SenderTypes] {
+    get
+  }
+  public typealias AllCases = [LocalzMobileSDK.SenderTypes]
+}
+final public class AssignedOrderListQuery : Apollo.GraphQLQuery {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var getOrdersInput: LocalzMobileSDK.GetOrdersInput
+  public init(getOrdersInput: LocalzMobileSDK.GetOrdersInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(assignedOrderList: [LocalzMobileSDK.AssignedOrderListQuery.Data.AssignedOrderList])
+    public var assignedOrderList: [LocalzMobileSDK.AssignedOrderListQuery.Data.AssignedOrderList] {
+      get
+      set
+    }
+    public struct AssignedOrderList : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(_id: Swift.String, orderTitle: Swift.String, orderLocation: Swift.String? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes, orderDate: LocalzMobileSDK.DateTime? = nil, orderNumber: Swift.String, subProjectId: Swift.String? = nil, chatChannelId: Swift.String? = nil)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var _id: Swift.String {
+        get
+        set
+      }
+      public var orderTitle: Swift.String {
+        get
+        set
+      }
+      public var orderLocation: Swift.String? {
+        get
+        set
+      }
+      public var orderStatus: LocalzMobileSDK.OrderStatusTypes {
+        get
+        set
+      }
+      public var orderDate: LocalzMobileSDK.DateTime? {
+        get
+        set
+      }
+      public var orderNumber: Swift.String {
+        get
+        set
+      }
+      public var subProjectId: Swift.String? {
+        get
+        set
+      }
+      public var chatChannelId: Swift.String? {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.AssignedOrderListQuery.Data.AssignedOrderList.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var assignedOrder: LocalzMobileSDK.AssignedOrder {
+          get
+          set
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class LoginMutation : Apollo.GraphQLMutation {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var loginInput: LocalzMobileSDK.LoginInput
+  public init(loginInput: LocalzMobileSDK.LoginInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(login: LocalzMobileSDK.LoginMutation.Data.Login)
+    public var login: LocalzMobileSDK.LoginMutation.Data.Login {
+      get
+      set
+    }
+    public struct Login : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(userId: Swift.String, username: Swift.String, firstName: Swift.String? = nil, lastName: Swift.String? = nil, accessToken: Swift.String, refreshToken: Swift.String, expiresIn: Swift.Double, error: Swift.String? = nil, message: Swift.String? = nil, statusCode: Swift.String? = nil)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var userId: Swift.String {
+        get
+        set
+      }
+      public var username: Swift.String {
+        get
+        set
+      }
+      public var firstName: Swift.String? {
+        get
+        set
+      }
+      public var lastName: Swift.String? {
+        get
+        set
+      }
+      public var accessToken: Swift.String {
+        get
+        set
+      }
+      public var refreshToken: Swift.String {
+        get
+        set
+      }
+      public var expiresIn: Swift.Double {
+        get
+        set
+      }
+      public var error: Swift.String? {
+        get
+        set
+      }
+      public var message: Swift.String? {
+        get
+        set
+      }
+      public var statusCode: Swift.String? {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.LoginMutation.Data.Login.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var loginData: LocalzMobileSDK.LoginData {
+          get
+          set
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class RefreshTokenMutation : Apollo.GraphQLMutation {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var refreshTokenInput: LocalzMobileSDK.RefreshTokenInput
+  public init(refreshTokenInput: LocalzMobileSDK.RefreshTokenInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(refreshToken: LocalzMobileSDK.RefreshTokenMutation.Data.RefreshToken)
+    public var refreshToken: LocalzMobileSDK.RefreshTokenMutation.Data.RefreshToken {
+      get
+      set
+    }
+    public struct RefreshToken : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(accessToken: Swift.String, refreshToken: Swift.String, expiresIn: Swift.Double)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var accessToken: Swift.String {
+        get
+        set
+      }
+      public var refreshToken: Swift.String {
+        get
+        set
+      }
+      public var expiresIn: Swift.Double {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.RefreshTokenMutation.Data.RefreshToken.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var refreshTokenData: LocalzMobileSDK.RefreshTokenData {
+          get
+          set
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class LogoutMutation : Apollo.GraphQLMutation {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var logoutInput: LocalzMobileSDK.LogoutInput
+  public init(logoutInput: LocalzMobileSDK.LogoutInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(logout: Apollo.JSONObject)
+    public var logout: Apollo.JSONObject {
+      get
+      set
+    }
+  }
+  @objc deinit
+}
+final public class CmwEventSubscription : Apollo.GraphQLSubscription {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  public init()
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(cmwEvent: LocalzMobileSDK.CmwEventSubscription.Data.CmwEvent)
+    public var cmwEvent: LocalzMobileSDK.CmwEventSubscription.Data.CmwEvent {
+      get
+      set
+    }
+    public struct CmwEvent : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(event: LocalzMobileSDK.ChatMyWayEvents, channelId: Swift.String? = nil, message: LocalzMobileSDK.CmwEventSubscription.Data.CmwEvent.Message? = nil, totalDocs: Swift.Double? = nil)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var event: LocalzMobileSDK.ChatMyWayEvents {
+        get
+        set
+      }
+      public var channelId: Swift.String? {
+        get
+        set
+      }
+      public var message: LocalzMobileSDK.CmwEventSubscription.Data.CmwEvent.Message? {
+        get
+        set
+      }
+      public var totalDocs: Swift.Double? {
+        get
+        set
+      }
+      public struct Message : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(_id: Swift.String, text: Swift.String, deleted: Swift.String? = nil, channelId: Swift.String, trackId: Swift.String? = nil, userId: Swift.String? = nil, createdAt: LocalzMobileSDK.DateTime, sender: LocalzMobileSDK.SenderTypes? = nil, senderName: Swift.String, correlId: Swift.String)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var _id: Swift.String {
+          get
+          set
+        }
+        public var text: Swift.String {
+          get
+          set
+        }
+        public var deleted: Swift.String? {
+          get
+          set
+        }
+        public var channelId: Swift.String {
+          get
+          set
+        }
+        public var trackId: Swift.String? {
+          get
+          set
+        }
+        public var userId: Swift.String? {
+          get
+          set
+        }
+        public var createdAt: LocalzMobileSDK.DateTime {
+          get
+          set
+        }
+        public var sender: LocalzMobileSDK.SenderTypes? {
+          get
+          set
+        }
+        public var senderName: Swift.String {
+          get
+          set
+        }
+        public var correlId: Swift.String {
+          get
+          set
+        }
+        public var fragments: LocalzMobileSDK.CmwEventSubscription.Data.CmwEvent.Message.Fragments {
+          get
+          set
+        }
+        public struct Fragments {
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public var messageData: LocalzMobileSDK.MessageData {
+            get
+            set
+          }
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class ContactListQuery : Apollo.GraphQLQuery {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var getOrdersInput: LocalzMobileSDK.GetOrdersInput
+  public init(getOrdersInput: LocalzMobileSDK.GetOrdersInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(contactList: [LocalzMobileSDK.ContactListQuery.Data.ContactList])
+    public var contactList: [LocalzMobileSDK.ContactListQuery.Data.ContactList] {
+      get
+      set
+    }
+    public struct ContactList : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(_id: Swift.String, channelType: LocalzMobileSDK.ChatChannelTypes, name: Swift.String, info: Swift.String? = nil, orderNumber: Swift.String? = nil, subProjectId: Swift.String? = nil, siteId: Swift.String? = nil, chatChannelId: Swift.String? = nil)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var _id: Swift.String {
+        get
+        set
+      }
+      public var channelType: LocalzMobileSDK.ChatChannelTypes {
+        get
+        set
+      }
+      public var name: Swift.String {
+        get
+        set
+      }
+      public var info: Swift.String? {
+        get
+        set
+      }
+      public var orderNumber: Swift.String? {
+        get
+        set
+      }
+      public var subProjectId: Swift.String? {
+        get
+        set
+      }
+      public var siteId: Swift.String? {
+        get
+        set
+      }
+      public var chatChannelId: Swift.String? {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.ContactListQuery.Data.ContactList.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var contact: LocalzMobileSDK.Contact {
+          get
+          set
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class CreateMessageByOrderNumberMutation : Apollo.GraphQLMutation {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var createMessageByOrderNumberInput: LocalzMobileSDK.CreateMessageByOrderNumberInput
+  public init(createMessageByOrderNumberInput: LocalzMobileSDK.CreateMessageByOrderNumberInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(createMessageByOrderNumber: LocalzMobileSDK.CreateMessageByOrderNumberMutation.Data.CreateMessageByOrderNumber)
+    public var createMessageByOrderNumber: LocalzMobileSDK.CreateMessageByOrderNumberMutation.Data.CreateMessageByOrderNumber {
+      get
+      set
+    }
+    public struct CreateMessageByOrderNumber : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(_id: Swift.String, text: Swift.String, deleted: Swift.String? = nil, channelId: Swift.String, trackId: Swift.String? = nil, userId: Swift.String? = nil, createdAt: LocalzMobileSDK.DateTime, sender: LocalzMobileSDK.SenderTypes? = nil, senderName: Swift.String, correlId: Swift.String)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var _id: Swift.String {
+        get
+        set
+      }
+      public var text: Swift.String {
+        get
+        set
+      }
+      public var deleted: Swift.String? {
+        get
+        set
+      }
+      public var channelId: Swift.String {
+        get
+        set
+      }
+      public var trackId: Swift.String? {
+        get
+        set
+      }
+      public var userId: Swift.String? {
+        get
+        set
+      }
+      public var createdAt: LocalzMobileSDK.DateTime {
+        get
+        set
+      }
+      public var sender: LocalzMobileSDK.SenderTypes? {
+        get
+        set
+      }
+      public var senderName: Swift.String {
+        get
+        set
+      }
+      public var correlId: Swift.String {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.CreateMessageByOrderNumberMutation.Data.CreateMessageByOrderNumber.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var messageData: LocalzMobileSDK.MessageData {
+          get
+          set
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class CreateMessageBySiteIdMutation : Apollo.GraphQLMutation {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var createMessageBySiteIdInput: LocalzMobileSDK.CreateMessageBySiteIdInput
+  public init(createMessageBySiteIdInput: LocalzMobileSDK.CreateMessageBySiteIdInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(createMessageBySiteId: LocalzMobileSDK.CreateMessageBySiteIdMutation.Data.CreateMessageBySiteId)
+    public var createMessageBySiteId: LocalzMobileSDK.CreateMessageBySiteIdMutation.Data.CreateMessageBySiteId {
+      get
+      set
+    }
+    public struct CreateMessageBySiteId : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(_id: Swift.String, text: Swift.String, deleted: Swift.String? = nil, channelId: Swift.String, trackId: Swift.String? = nil, userId: Swift.String? = nil, createdAt: LocalzMobileSDK.DateTime, sender: LocalzMobileSDK.SenderTypes? = nil, senderName: Swift.String, correlId: Swift.String)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var _id: Swift.String {
+        get
+        set
+      }
+      public var text: Swift.String {
+        get
+        set
+      }
+      public var deleted: Swift.String? {
+        get
+        set
+      }
+      public var channelId: Swift.String {
+        get
+        set
+      }
+      public var trackId: Swift.String? {
+        get
+        set
+      }
+      public var userId: Swift.String? {
+        get
+        set
+      }
+      public var createdAt: LocalzMobileSDK.DateTime {
+        get
+        set
+      }
+      public var sender: LocalzMobileSDK.SenderTypes? {
+        get
+        set
+      }
+      public var senderName: Swift.String {
+        get
+        set
+      }
+      public var correlId: Swift.String {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.CreateMessageBySiteIdMutation.Data.CreateMessageBySiteId.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var messageData: LocalzMobileSDK.MessageData {
+          get
+          set
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class DeviceStateQuery : Apollo.GraphQLQuery {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var deviceStateInput: LocalzMobileSDK.DeviceStateInput
+  public init(deviceStateInput: LocalzMobileSDK.DeviceStateInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(deviceState: LocalzMobileSDK.DeviceStateQuery.Data.DeviceState)
+    public var deviceState: LocalzMobileSDK.DeviceStateQuery.Data.DeviceState {
+      get
+      set
+    }
+    public struct DeviceState : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(info: LocalzMobileSDK.DeviceStateQuery.Data.DeviceState.Info, createdAt: LocalzMobileSDK.DateTime, updatedAt: LocalzMobileSDK.DateTime)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var info: LocalzMobileSDK.DeviceStateQuery.Data.DeviceState.Info {
+        get
+        set
+      }
+      public var createdAt: LocalzMobileSDK.DateTime {
+        get
+        set
+      }
+      public var updatedAt: LocalzMobileSDK.DateTime {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.DeviceStateQuery.Data.DeviceState.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var deviceStateData: LocalzMobileSDK.DeviceStateData {
+          get
+          set
+        }
+      }
+      public struct Info : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(name: Swift.String, resolution: LocalzMobileSDK.Resolutions)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var name: Swift.String {
+          get
+          set
+        }
+        public var resolution: LocalzMobileSDK.Resolutions {
+          get
+          set
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class ConfirmEventMutation : Apollo.GraphQLMutation {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var confirmEventInput: LocalzMobileSDK.ConfirmEventInput
+  public init(confirmEventInput: LocalzMobileSDK.ConfirmEventInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(confirmEvent: LocalzMobileSDK.ConfirmEventMutation.Data.ConfirmEvent)
+    public var confirmEvent: LocalzMobileSDK.ConfirmEventMutation.Data.ConfirmEvent {
+      get
+      set
+    }
+    public struct ConfirmEvent : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(requestResolution: LocalzMobileSDK.Resolutions, createdAt: LocalzMobileSDK.DateTime, updatedAt: LocalzMobileSDK.DateTime, confirmed: Swift.Bool)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var requestResolution: LocalzMobileSDK.Resolutions {
+        get
+        set
+      }
+      public var createdAt: LocalzMobileSDK.DateTime {
+        get
+        set
+      }
+      public var updatedAt: LocalzMobileSDK.DateTime {
+        get
+        set
+      }
+      public var confirmed: Swift.Bool {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.ConfirmEventMutation.Data.ConfirmEvent.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var confirmEventData: LocalzMobileSDK.ConfirmEventData {
+          get
+          set
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class GetChannelByIdQuery : Apollo.GraphQLQuery {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var getChannelByChannelIdInput: LocalzMobileSDK.GetChannelByChannelIdInput
+  public init(getChannelByChannelIdInput: LocalzMobileSDK.GetChannelByChannelIdInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(getChannelByChannelId: LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId)
+    public var getChannelByChannelId: LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId {
+      get
+      set
+    }
+    public struct GetChannelByChannelId : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(_id: Swift.String, type: LocalzMobileSDK.ChatChannelTypes, siteId: Swift.String? = nil, createdBy: Swift.String, preview: LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId.Preview? = nil, order: LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId.Order? = nil, siteName: Swift.String? = nil, participants: [LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId.Participant], customerName: Swift.String? = nil, headerTitle: Swift.String, subHeaderTitle: Swift.String? = nil, closedReason: LocalzMobileSDK.ChatChannelClosedReasons? = nil)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var _id: Swift.String {
+        get
+        set
+      }
+      public var type: LocalzMobileSDK.ChatChannelTypes {
+        get
+        set
+      }
+      public var siteId: Swift.String? {
+        get
+        set
+      }
+      public var createdBy: Swift.String {
+        get
+        set
+      }
+      public var preview: LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId.Preview? {
+        get
+        set
+      }
+      public var order: LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId.Order? {
+        get
+        set
+      }
+      public var siteName: Swift.String? {
+        get
+        set
+      }
+      public var participants: [LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId.Participant] {
+        get
+        set
+      }
+      public var customerName: Swift.String? {
+        get
+        set
+      }
+      public var headerTitle: Swift.String {
+        get
+        set
+      }
+      public var subHeaderTitle: Swift.String? {
+        get
+        set
+      }
+      public var closedReason: LocalzMobileSDK.ChatChannelClosedReasons? {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var chatChannel: LocalzMobileSDK.ChatChannel {
+          get
+          set
+        }
+      }
+      public struct Preview : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(text: Swift.String, createdAt: LocalzMobileSDK.DateTime)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var text: Swift.String {
+          get
+          set
+        }
+        public var createdAt: LocalzMobileSDK.DateTime {
+          get
+          set
+        }
+      }
+      public struct Order : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(orderNumber: Swift.String, subProjectId: Swift.String? = nil, deliveryName: Swift.String? = nil, completed: LocalzMobileSDK.DateTime? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var orderNumber: Swift.String {
+          get
+          set
+        }
+        public var subProjectId: Swift.String? {
+          get
+          set
+        }
+        public var deliveryName: Swift.String? {
+          get
+          set
+        }
+        public var completed: LocalzMobileSDK.DateTime? {
+          get
+          set
+        }
+        public var orderStatus: LocalzMobileSDK.OrderStatusTypes {
+          get
+          set
+        }
+        public var fragments: LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId.Order.Fragments {
+          get
+          set
+        }
+        public struct Fragments {
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public var chatOrder: LocalzMobileSDK.ChatOrder {
+            get
+            set
+          }
+        }
+      }
+      public struct Participant : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(userId: Swift.String, username: Swift.String, name: Swift.String, muted: Swift.Bool, joined: LocalzMobileSDK.DateTime, lastSeen: LocalzMobileSDK.DateTime? = nil, type: LocalzMobileSDK.ParticipantTypes)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var userId: Swift.String {
+          get
+          set
+        }
+        public var username: Swift.String {
+          get
+          set
+        }
+        public var name: Swift.String {
+          get
+          set
+        }
+        public var muted: Swift.Bool {
+          get
+          set
+        }
+        public var joined: LocalzMobileSDK.DateTime {
+          get
+          set
+        }
+        public var lastSeen: LocalzMobileSDK.DateTime? {
+          get
+          set
+        }
+        public var type: LocalzMobileSDK.ParticipantTypes {
+          get
+          set
+        }
+        public var fragments: LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId.Participant.Fragments {
+          get
+          set
+        }
+        public struct Fragments {
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public var participant: LocalzMobileSDK.GetChannelByIdQuery.Data.GetChannelByChannelId.Participant {
+            get
+            set
+          }
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class GetChannelsQuery : Apollo.GraphQLQuery {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var getChannelsInput: LocalzMobileSDK.GetChannelsInput
+  public init(getChannelsInput: LocalzMobileSDK.GetChannelsInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(getChannels: LocalzMobileSDK.GetChannelsQuery.Data.GetChannel)
+    public var getChannels: LocalzMobileSDK.GetChannelsQuery.Data.GetChannel {
+      get
+      set
+    }
+    public struct GetChannel : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(docs: [LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc], hasNext: Swift.Bool, hasPrevious: Swift.Bool, next: Apollo.GraphQLID? = nil, previous: Apollo.GraphQLID? = nil, totalDocs: Swift.Double)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var docs: [LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc] {
+        get
+        set
+      }
+      public var hasNext: Swift.Bool {
+        get
+        set
+      }
+      public var hasPrevious: Swift.Bool {
+        get
+        set
+      }
+      public var next: Apollo.GraphQLID? {
+        get
+        set
+      }
+      public var previous: Apollo.GraphQLID? {
+        get
+        set
+      }
+      public var totalDocs: Swift.Double {
+        get
+        set
+      }
+      public struct Doc : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(_id: Swift.String, type: LocalzMobileSDK.ChatChannelTypes, siteId: Swift.String? = nil, createdBy: Swift.String, preview: LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc.Preview? = nil, order: LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc.Order? = nil, siteName: Swift.String? = nil, participants: [LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc.Participant], customerName: Swift.String? = nil, headerTitle: Swift.String, subHeaderTitle: Swift.String? = nil, closedReason: LocalzMobileSDK.ChatChannelClosedReasons? = nil)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var _id: Swift.String {
+          get
+          set
+        }
+        public var type: LocalzMobileSDK.ChatChannelTypes {
+          get
+          set
+        }
+        public var siteId: Swift.String? {
+          get
+          set
+        }
+        public var createdBy: Swift.String {
+          get
+          set
+        }
+        public var preview: LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc.Preview? {
+          get
+          set
+        }
+        public var order: LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc.Order? {
+          get
+          set
+        }
+        public var siteName: Swift.String? {
+          get
+          set
+        }
+        public var participants: [LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc.Participant] {
+          get
+          set
+        }
+        public var customerName: Swift.String? {
+          get
+          set
+        }
+        public var headerTitle: Swift.String {
+          get
+          set
+        }
+        public var subHeaderTitle: Swift.String? {
+          get
+          set
+        }
+        public var closedReason: LocalzMobileSDK.ChatChannelClosedReasons? {
+          get
+          set
+        }
+        public var fragments: LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc.Fragments {
+          get
+          set
+        }
+        public struct Fragments {
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public var chatChannel: LocalzMobileSDK.ChatChannel {
+            get
+            set
+          }
+        }
+        public struct Preview : Apollo.GraphQLSelectionSet {
+          public static let possibleTypes: [Swift.String]
+          public static var selections: [Apollo.GraphQLSelection] {
+            get
+          }
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public init(text: Swift.String, createdAt: LocalzMobileSDK.DateTime)
+          public var __typename: Swift.String {
+            get
+            set
+          }
+          public var text: Swift.String {
+            get
+            set
+          }
+          public var createdAt: LocalzMobileSDK.DateTime {
+            get
+            set
+          }
+        }
+        public struct Order : Apollo.GraphQLSelectionSet {
+          public static let possibleTypes: [Swift.String]
+          public static var selections: [Apollo.GraphQLSelection] {
+            get
+          }
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public init(orderNumber: Swift.String, subProjectId: Swift.String? = nil, deliveryName: Swift.String? = nil, completed: LocalzMobileSDK.DateTime? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes)
+          public var __typename: Swift.String {
+            get
+            set
+          }
+          public var orderNumber: Swift.String {
+            get
+            set
+          }
+          public var subProjectId: Swift.String? {
+            get
+            set
+          }
+          public var deliveryName: Swift.String? {
+            get
+            set
+          }
+          public var completed: LocalzMobileSDK.DateTime? {
+            get
+            set
+          }
+          public var orderStatus: LocalzMobileSDK.OrderStatusTypes {
+            get
+            set
+          }
+          public var fragments: LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc.Order.Fragments {
+            get
+            set
+          }
+          public struct Fragments {
+            public var resultMap: Apollo.ResultMap {
+              get
+            }
+            public init(unsafeResultMap: Apollo.ResultMap)
+            public var chatOrder: LocalzMobileSDK.ChatOrder {
+              get
+              set
+            }
+          }
+        }
+        public struct Participant : Apollo.GraphQLSelectionSet {
+          public static let possibleTypes: [Swift.String]
+          public static var selections: [Apollo.GraphQLSelection] {
+            get
+          }
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public init(userId: Swift.String, username: Swift.String, name: Swift.String, muted: Swift.Bool, joined: LocalzMobileSDK.DateTime, lastSeen: LocalzMobileSDK.DateTime? = nil, type: LocalzMobileSDK.ParticipantTypes)
+          public var __typename: Swift.String {
+            get
+            set
+          }
+          public var userId: Swift.String {
+            get
+            set
+          }
+          public var username: Swift.String {
+            get
+            set
+          }
+          public var name: Swift.String {
+            get
+            set
+          }
+          public var muted: Swift.Bool {
+            get
+            set
+          }
+          public var joined: LocalzMobileSDK.DateTime {
+            get
+            set
+          }
+          public var lastSeen: LocalzMobileSDK.DateTime? {
+            get
+            set
+          }
+          public var type: LocalzMobileSDK.ParticipantTypes {
+            get
+            set
+          }
+          public var fragments: LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc.Participant.Fragments {
+            get
+            set
+          }
+          public struct Fragments {
+            public var resultMap: Apollo.ResultMap {
+              get
+            }
+            public init(unsafeResultMap: Apollo.ResultMap)
+            public var participant: LocalzMobileSDK.GetChannelsQuery.Data.GetChannel.Doc.Participant {
+              get
+              set
+            }
+          }
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class GetMessagesByChannelIdQuery : Apollo.GraphQLQuery {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var getMessagesByChannelIdInput: LocalzMobileSDK.GetMessagesByChannelIdInput
+  public init(getMessagesByChannelIdInput: LocalzMobileSDK.GetMessagesByChannelIdInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(getMessagesByChannelId: LocalzMobileSDK.GetMessagesByChannelIdQuery.Data.GetMessagesByChannelId)
+    public var getMessagesByChannelId: LocalzMobileSDK.GetMessagesByChannelIdQuery.Data.GetMessagesByChannelId {
+      get
+      set
+    }
+    public struct GetMessagesByChannelId : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(docs: [LocalzMobileSDK.GetMessagesByChannelIdQuery.Data.GetMessagesByChannelId.Doc], hasNext: Swift.Bool, hasPrevious: Swift.Bool, next: Apollo.GraphQLID? = nil, previous: Apollo.GraphQLID? = nil, totalDocs: Swift.Double)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var docs: [LocalzMobileSDK.GetMessagesByChannelIdQuery.Data.GetMessagesByChannelId.Doc] {
+        get
+        set
+      }
+      public var hasNext: Swift.Bool {
+        get
+        set
+      }
+      public var hasPrevious: Swift.Bool {
+        get
+        set
+      }
+      public var next: Apollo.GraphQLID? {
+        get
+        set
+      }
+      public var previous: Apollo.GraphQLID? {
+        get
+        set
+      }
+      public var totalDocs: Swift.Double {
+        get
+        set
+      }
+      public struct Doc : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(_id: Swift.String, text: Swift.String, deleted: Swift.String? = nil, channelId: Swift.String, trackId: Swift.String? = nil, userId: Swift.String? = nil, createdAt: LocalzMobileSDK.DateTime, sender: LocalzMobileSDK.SenderTypes? = nil, senderName: Swift.String, correlId: Swift.String)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var _id: Swift.String {
+          get
+          set
+        }
+        public var text: Swift.String {
+          get
+          set
+        }
+        public var deleted: Swift.String? {
+          get
+          set
+        }
+        public var channelId: Swift.String {
+          get
+          set
+        }
+        public var trackId: Swift.String? {
+          get
+          set
+        }
+        public var userId: Swift.String? {
+          get
+          set
+        }
+        public var createdAt: LocalzMobileSDK.DateTime {
+          get
+          set
+        }
+        public var sender: LocalzMobileSDK.SenderTypes? {
+          get
+          set
+        }
+        public var senderName: Swift.String {
+          get
+          set
+        }
+        public var correlId: Swift.String {
+          get
+          set
+        }
+        public var fragments: LocalzMobileSDK.GetMessagesByChannelIdQuery.Data.GetMessagesByChannelId.Doc.Fragments {
+          get
+          set
+        }
+        public struct Fragments {
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public var messageData: LocalzMobileSDK.MessageData {
+            get
+            set
+          }
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class GetOrdersQuery : Apollo.GraphQLQuery {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var getOrdersInput: LocalzMobileSDK.GetOrdersInput
+  public init(getOrdersInput: LocalzMobileSDK.GetOrdersInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(getOrders: [LocalzMobileSDK.GetOrdersQuery.Data.GetOrder])
+    public var getOrders: [LocalzMobileSDK.GetOrdersQuery.Data.GetOrder] {
+      get
+      set
+    }
+    public struct GetOrder : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(trackId: Swift.String? = nil, orderNumber: Swift.String, subProjectId: Swift.String? = nil, address: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Address? = nil, allocatedUser: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.AllocatedUser? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes, orderDate: LocalzMobileSDK.DateTime? = nil, specific: Apollo.JSONObject? = nil, deliveryName: Swift.String? = nil)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var trackId: Swift.String? {
+        get
+        set
+      }
+      public var orderNumber: Swift.String {
+        get
+        set
+      }
+      public var subProjectId: Swift.String? {
+        get
+        set
+      }
+      public var address: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Address? {
+        get
+        set
+      }
+      public var allocatedUser: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.AllocatedUser? {
+        get
+        set
+      }
+      public var orderStatus: LocalzMobileSDK.OrderStatusTypes {
+        get
+        set
+      }
+      public var orderDate: LocalzMobileSDK.DateTime? {
+        get
+        set
+      }
+      public var specific: Apollo.JSONObject? {
+        get
+        set
+      }
+      public var deliveryName: Swift.String? {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var detailedOrder: LocalzMobileSDK.DetailedOrder {
+          get
+          set
+        }
+      }
+      public struct Address : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(streetAddress: Swift.String? = nil, subStreetAddress: Swift.String? = nil, region: Swift.String? = nil, locality: Swift.String? = nil, postcode: Swift.String? = nil, country: Swift.String? = nil, geoJson: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Address.GeoJson? = nil)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var streetAddress: Swift.String? {
+          get
+          set
+        }
+        public var subStreetAddress: Swift.String? {
+          get
+          set
+        }
+        public var region: Swift.String? {
+          get
+          set
+        }
+        public var locality: Swift.String? {
+          get
+          set
+        }
+        public var postcode: Swift.String? {
+          get
+          set
+        }
+        public var country: Swift.String? {
+          get
+          set
+        }
+        public var geoJson: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Address.GeoJson? {
+          get
+          set
+        }
+        public struct GeoJson : Apollo.GraphQLSelectionSet {
+          public static let possibleTypes: [Swift.String]
+          public static var selections: [Apollo.GraphQLSelection] {
+            get
+          }
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public init(coordinates: [Swift.Double])
+          public var __typename: Swift.String {
+            get
+            set
+          }
+          public var coordinates: [Swift.Double] {
+            get
+            set
+          }
+        }
+      }
+      public struct AllocatedUser : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(firstName: Swift.String? = nil, lastName: Swift.String? = nil)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var firstName: Swift.String? {
+          get
+          set
+        }
+        public var lastName: Swift.String? {
+          get
+          set
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class GetSitesQuery : Apollo.GraphQLQuery {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  public init()
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(getSites: [LocalzMobileSDK.GetSitesQuery.Data.GetSite])
+    public var getSites: [LocalzMobileSDK.GetSitesQuery.Data.GetSite] {
+      get
+      set
+    }
+    public struct GetSite : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(siteId: Swift.String, name: Swift.String? = nil, storeCode: Swift.String? = nil, timezone: Swift.String? = nil)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var siteId: Swift.String {
+        get
+        set
+      }
+      public var name: Swift.String? {
+        get
+        set
+      }
+      public var storeCode: Swift.String? {
+        get
+        set
+      }
+      public var timezone: Swift.String? {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.GetSitesQuery.Data.GetSite.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var site: LocalzMobileSDK.Site {
+          get
+          set
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class SendLocationMutation : Apollo.GraphQLMutation {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var sendLocationInput: LocalzMobileSDK.SendLocationInput
+  public init(sendLocationInput: LocalzMobileSDK.SendLocationInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(sendLocation: LocalzMobileSDK.SendLocationMutation.Data.SendLocation)
+    public var sendLocation: LocalzMobileSDK.SendLocationMutation.Data.SendLocation {
+      get
+      set
+    }
+    public struct SendLocation : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(tracks: [LocalzMobileSDK.SendLocationMutation.Data.SendLocation.Track]? = nil)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var tracks: [LocalzMobileSDK.SendLocationMutation.Data.SendLocation.Track]? {
+        get
+        set
+      }
+      public struct Track : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(trackId: Swift.String, validTo: LocalzMobileSDK.DateTime)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var trackId: Swift.String {
+          get
+          set
+        }
+        public var validTo: LocalzMobileSDK.DateTime {
+          get
+          set
+        }
+        public var fragments: LocalzMobileSDK.SendLocationMutation.Data.SendLocation.Track.Fragments {
+          get
+          set
+        }
+        public struct Fragments {
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public var trackInfo: LocalzMobileSDK.TrackInfo {
+            get
+            set
+          }
+        }
+      }
+    }
+  }
+  @objc deinit
+}
+final public class OnDutyMutation : Apollo.GraphQLMutation {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var onDutyInput: LocalzMobileSDK.OnDutyInput
+  public init(onDutyInput: LocalzMobileSDK.OnDutyInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(onDuty: Apollo.JSONObject)
+    public var onDuty: Apollo.JSONObject {
+      get
+      set
+    }
+  }
+  @objc deinit
+}
+final public class RegisterDeviceMutation : Apollo.GraphQLMutation {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var registerDeviceInput: LocalzMobileSDK.RegisterDeviceInput
+  public init(registerDeviceInput: LocalzMobileSDK.RegisterDeviceInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(registerDevice: LocalzMobileSDK.RegisterDeviceMutation.Data.RegisterDevice)
+    public var registerDevice: LocalzMobileSDK.RegisterDeviceMutation.Data.RegisterDevice {
+      get
+      set
+    }
+    public struct RegisterDevice : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(deviceId: Swift.String)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var deviceId: Swift.String {
+        get
+        set
+      }
+    }
+  }
+  @objc deinit
+}
+final public class UpdateLastSeenMutation : Apollo.GraphQLMutation {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var updateLastSeenInput: LocalzMobileSDK.UpdateLastSeenInput
+  public init(updateLastSeenInput: LocalzMobileSDK.UpdateLastSeenInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(updateLastSeen: Apollo.JSONObject)
+    public var updateLastSeen: Apollo.JSONObject {
+      get
+      set
+    }
+  }
+  @objc deinit
+}
+public struct AssignedOrder : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(_id: Swift.String, orderTitle: Swift.String, orderLocation: Swift.String? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes, orderDate: LocalzMobileSDK.DateTime? = nil, orderNumber: Swift.String, subProjectId: Swift.String? = nil, chatChannelId: Swift.String? = nil)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var _id: Swift.String {
+    get
+    set
+  }
+  public var orderTitle: Swift.String {
+    get
+    set
+  }
+  public var orderLocation: Swift.String? {
+    get
+    set
+  }
+  public var orderStatus: LocalzMobileSDK.OrderStatusTypes {
+    get
+    set
+  }
+  public var orderDate: LocalzMobileSDK.DateTime? {
+    get
+    set
+  }
+  public var orderNumber: Swift.String {
+    get
+    set
+  }
+  public var subProjectId: Swift.String? {
+    get
+    set
+  }
+  public var chatChannelId: Swift.String? {
+    get
+    set
+  }
+}
+public struct LoginData : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(userId: Swift.String, username: Swift.String, firstName: Swift.String? = nil, lastName: Swift.String? = nil, accessToken: Swift.String, refreshToken: Swift.String, expiresIn: Swift.Double, error: Swift.String? = nil, message: Swift.String? = nil, statusCode: Swift.String? = nil)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var userId: Swift.String {
+    get
+    set
+  }
+  public var username: Swift.String {
+    get
+    set
+  }
+  public var firstName: Swift.String? {
+    get
+    set
+  }
+  public var lastName: Swift.String? {
+    get
+    set
+  }
+  public var accessToken: Swift.String {
+    get
+    set
+  }
+  public var refreshToken: Swift.String {
+    get
+    set
+  }
+  public var expiresIn: Swift.Double {
+    get
+    set
+  }
+  public var error: Swift.String? {
+    get
+    set
+  }
+  public var message: Swift.String? {
+    get
+    set
+  }
+  public var statusCode: Swift.String? {
+    get
+    set
+  }
+}
+public struct RefreshTokenData : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(accessToken: Swift.String, refreshToken: Swift.String, expiresIn: Swift.Double)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var accessToken: Swift.String {
+    get
+    set
+  }
+  public var refreshToken: Swift.String {
+    get
+    set
+  }
+  public var expiresIn: Swift.Double {
+    get
+    set
+  }
+}
+public struct Contact : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(_id: Swift.String, channelType: LocalzMobileSDK.ChatChannelTypes, name: Swift.String, info: Swift.String? = nil, orderNumber: Swift.String? = nil, subProjectId: Swift.String? = nil, siteId: Swift.String? = nil, chatChannelId: Swift.String? = nil)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var _id: Swift.String {
+    get
+    set
+  }
+  public var channelType: LocalzMobileSDK.ChatChannelTypes {
+    get
+    set
+  }
+  public var name: Swift.String {
+    get
+    set
+  }
+  public var info: Swift.String? {
+    get
+    set
+  }
+  public var orderNumber: Swift.String? {
+    get
+    set
+  }
+  public var subProjectId: Swift.String? {
+    get
+    set
+  }
+  public var siteId: Swift.String? {
+    get
+    set
+  }
+  public var chatChannelId: Swift.String? {
+    get
+    set
+  }
+}
+public struct DeviceStateData : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(info: LocalzMobileSDK.DeviceStateData.Info, createdAt: LocalzMobileSDK.DateTime, updatedAt: LocalzMobileSDK.DateTime)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var info: LocalzMobileSDK.DeviceStateData.Info {
+    get
+    set
+  }
+  public var createdAt: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var updatedAt: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public struct Info : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(name: Swift.String, resolution: LocalzMobileSDK.Resolutions)
+    public var __typename: Swift.String {
+      get
+      set
+    }
+    public var name: Swift.String {
+      get
+      set
+    }
+    public var resolution: LocalzMobileSDK.Resolutions {
+      get
+      set
+    }
+  }
+}
+public struct ConfirmEventData : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(requestResolution: LocalzMobileSDK.Resolutions, createdAt: LocalzMobileSDK.DateTime, updatedAt: LocalzMobileSDK.DateTime, confirmed: Swift.Bool)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var requestResolution: LocalzMobileSDK.Resolutions {
+    get
+    set
+  }
+  public var createdAt: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var updatedAt: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var confirmed: Swift.Bool {
+    get
+    set
+  }
+}
+public struct ChatChannel : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(_id: Swift.String, type: LocalzMobileSDK.ChatChannelTypes, siteId: Swift.String? = nil, createdBy: Swift.String, preview: LocalzMobileSDK.ChatChannel.Preview? = nil, order: LocalzMobileSDK.ChatChannel.Order? = nil, siteName: Swift.String? = nil, participants: [LocalzMobileSDK.ChatChannel.Participant], customerName: Swift.String? = nil, headerTitle: Swift.String, subHeaderTitle: Swift.String? = nil, closedReason: LocalzMobileSDK.ChatChannelClosedReasons? = nil)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var _id: Swift.String {
+    get
+    set
+  }
+  public var type: LocalzMobileSDK.ChatChannelTypes {
+    get
+    set
+  }
+  public var siteId: Swift.String? {
+    get
+    set
+  }
+  public var createdBy: Swift.String {
+    get
+    set
+  }
+  public var preview: LocalzMobileSDK.ChatChannel.Preview? {
+    get
+    set
+  }
+  public var order: LocalzMobileSDK.ChatChannel.Order? {
+    get
+    set
+  }
+  public var siteName: Swift.String? {
+    get
+    set
+  }
+  public var participants: [LocalzMobileSDK.ChatChannel.Participant] {
+    get
+    set
+  }
+  public var customerName: Swift.String? {
+    get
+    set
+  }
+  public var headerTitle: Swift.String {
+    get
+    set
+  }
+  public var subHeaderTitle: Swift.String? {
+    get
+    set
+  }
+  public var closedReason: LocalzMobileSDK.ChatChannelClosedReasons? {
+    get
+    set
+  }
+  public struct Preview : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(text: Swift.String, createdAt: LocalzMobileSDK.DateTime)
+    public var __typename: Swift.String {
+      get
+      set
+    }
+    public var text: Swift.String {
+      get
+      set
+    }
+    public var createdAt: LocalzMobileSDK.DateTime {
+      get
+      set
+    }
+  }
+  public struct Order : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(orderNumber: Swift.String, subProjectId: Swift.String? = nil, deliveryName: Swift.String? = nil, completed: LocalzMobileSDK.DateTime? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes)
+    public var __typename: Swift.String {
+      get
+      set
+    }
+    public var orderNumber: Swift.String {
+      get
+      set
+    }
+    public var subProjectId: Swift.String? {
+      get
+      set
+    }
+    public var deliveryName: Swift.String? {
+      get
+      set
+    }
+    public var completed: LocalzMobileSDK.DateTime? {
+      get
+      set
+    }
+    public var orderStatus: LocalzMobileSDK.OrderStatusTypes {
+      get
+      set
+    }
+    public var fragments: LocalzMobileSDK.ChatChannel.Order.Fragments {
+      get
+      set
+    }
+    public struct Fragments {
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public var chatOrder: LocalzMobileSDK.ChatOrder {
+        get
+        set
+      }
+    }
+  }
+  public struct Participant : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(userId: Swift.String, username: Swift.String, name: Swift.String, muted: Swift.Bool, joined: LocalzMobileSDK.DateTime, lastSeen: LocalzMobileSDK.DateTime? = nil, type: LocalzMobileSDK.ParticipantTypes)
+    public var __typename: Swift.String {
+      get
+      set
+    }
+    public var userId: Swift.String {
+      get
+      set
+    }
+    public var username: Swift.String {
+      get
+      set
+    }
+    public var name: Swift.String {
+      get
+      set
+    }
+    public var muted: Swift.Bool {
+      get
+      set
+    }
+    public var joined: LocalzMobileSDK.DateTime {
+      get
+      set
+    }
+    public var lastSeen: LocalzMobileSDK.DateTime? {
+      get
+      set
+    }
+    public var type: LocalzMobileSDK.ParticipantTypes {
+      get
+      set
+    }
+    public var fragments: LocalzMobileSDK.ChatChannel.Participant.Fragments {
+      get
+      set
+    }
+    public struct Fragments {
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public var participant: LocalzMobileSDK.ChatChannel.Participant {
+        get
+        set
+      }
+    }
+  }
+}
+public struct ChatOrder : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(orderNumber: Swift.String, subProjectId: Swift.String? = nil, deliveryName: Swift.String? = nil, completed: LocalzMobileSDK.DateTime? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var orderNumber: Swift.String {
+    get
+    set
+  }
+  public var subProjectId: Swift.String? {
+    get
+    set
+  }
+  public var deliveryName: Swift.String? {
+    get
+    set
+  }
+  public var completed: LocalzMobileSDK.DateTime? {
+    get
+    set
+  }
+  public var orderStatus: LocalzMobileSDK.OrderStatusTypes {
+    get
+    set
+  }
+}
+public struct Participant : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(userId: Swift.String, username: Swift.String, name: Swift.String, muted: Swift.Bool, joined: LocalzMobileSDK.DateTime, lastSeen: LocalzMobileSDK.DateTime? = nil, type: LocalzMobileSDK.ParticipantTypes)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var userId: Swift.String {
+    get
+    set
+  }
+  public var username: Swift.String {
+    get
+    set
+  }
+  public var name: Swift.String {
+    get
+    set
+  }
+  public var muted: Swift.Bool {
+    get
+    set
+  }
+  public var joined: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var lastSeen: LocalzMobileSDK.DateTime? {
+    get
+    set
+  }
+  public var type: LocalzMobileSDK.ParticipantTypes {
+    get
+    set
+  }
+}
+public struct MessageData : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(_id: Swift.String, text: Swift.String, deleted: Swift.String? = nil, channelId: Swift.String, trackId: Swift.String? = nil, userId: Swift.String? = nil, createdAt: LocalzMobileSDK.DateTime, sender: LocalzMobileSDK.SenderTypes? = nil, senderName: Swift.String, correlId: Swift.String)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var _id: Swift.String {
+    get
+    set
+  }
+  public var text: Swift.String {
+    get
+    set
+  }
+  public var deleted: Swift.String? {
+    get
+    set
+  }
+  public var channelId: Swift.String {
+    get
+    set
+  }
+  public var trackId: Swift.String? {
+    get
+    set
+  }
+  public var userId: Swift.String? {
+    get
+    set
+  }
+  public var createdAt: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var sender: LocalzMobileSDK.SenderTypes? {
+    get
+    set
+  }
+  public var senderName: Swift.String {
+    get
+    set
+  }
+  public var correlId: Swift.String {
+    get
+    set
+  }
+}
+public struct DetailedOrder : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(trackId: Swift.String? = nil, orderNumber: Swift.String, subProjectId: Swift.String? = nil, address: LocalzMobileSDK.DetailedOrder.Address? = nil, allocatedUser: LocalzMobileSDK.DetailedOrder.AllocatedUser? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes, orderDate: LocalzMobileSDK.DateTime? = nil, specific: Apollo.JSONObject? = nil, deliveryName: Swift.String? = nil)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var trackId: Swift.String? {
+    get
+    set
+  }
+  public var orderNumber: Swift.String {
+    get
+    set
+  }
+  public var subProjectId: Swift.String? {
+    get
+    set
+  }
+  public var address: LocalzMobileSDK.DetailedOrder.Address? {
+    get
+    set
+  }
+  public var allocatedUser: LocalzMobileSDK.DetailedOrder.AllocatedUser? {
+    get
+    set
+  }
+  public var orderStatus: LocalzMobileSDK.OrderStatusTypes {
+    get
+    set
+  }
+  public var orderDate: LocalzMobileSDK.DateTime? {
+    get
+    set
+  }
+  public var specific: Apollo.JSONObject? {
+    get
+    set
+  }
+  public var deliveryName: Swift.String? {
+    get
+    set
+  }
+  public struct Address : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(streetAddress: Swift.String? = nil, subStreetAddress: Swift.String? = nil, region: Swift.String? = nil, locality: Swift.String? = nil, postcode: Swift.String? = nil, country: Swift.String? = nil, geoJson: LocalzMobileSDK.DetailedOrder.Address.GeoJson? = nil)
+    public var __typename: Swift.String {
+      get
+      set
+    }
+    public var streetAddress: Swift.String? {
+      get
+      set
+    }
+    public var subStreetAddress: Swift.String? {
+      get
+      set
+    }
+    public var region: Swift.String? {
+      get
+      set
+    }
+    public var locality: Swift.String? {
+      get
+      set
+    }
+    public var postcode: Swift.String? {
+      get
+      set
+    }
+    public var country: Swift.String? {
+      get
+      set
+    }
+    public var geoJson: LocalzMobileSDK.DetailedOrder.Address.GeoJson? {
+      get
+      set
+    }
+    public struct GeoJson : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(coordinates: [Swift.Double])
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var coordinates: [Swift.Double] {
+        get
+        set
+      }
+    }
+  }
+  public struct AllocatedUser : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(firstName: Swift.String? = nil, lastName: Swift.String? = nil)
+    public var __typename: Swift.String {
+      get
+      set
+    }
+    public var firstName: Swift.String? {
+      get
+      set
+    }
+    public var lastName: Swift.String? {
+      get
+      set
+    }
+  }
+}
+public struct Site : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(siteId: Swift.String, name: Swift.String? = nil, storeCode: Swift.String? = nil, timezone: Swift.String? = nil)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var siteId: Swift.String {
+    get
+    set
+  }
+  public var name: Swift.String? {
+    get
+    set
+  }
+  public var storeCode: Swift.String? {
+    get
+    set
+  }
+  public var timezone: Swift.String? {
+    get
+    set
+  }
+}
+public struct TrackInfo : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(trackId: Swift.String, validTo: LocalzMobileSDK.DateTime)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var trackId: Swift.String {
+    get
+    set
+  }
+  public var validTo: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+}
+extension ChatChannel : Swift.Identifiable {
+  public var id: Swift.String {
+    get
+  }
+  public func getMessages(limit: Swift.Double? = nil, next: Swift.String? = nil, asc: Swift.Bool = false, forceReload: Swift.Bool = false, onSuccess: ((LocalzMobileSDK.MessageResult?) -> (Swift.Void))?, onFailure: ((Swift.Error) -> (Swift.Void))?)
+  public func createMessageListener(onUpdate: @escaping ((LocalzMobileSDK.MessageResult?) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void))) -> LocalzMobileSDK.MessageListener
+  public func sendMessage(text: Swift.String, onSuccess: ((LocalzMobileSDK.MessageData) -> (Swift.Void))?, onFailure: ((Swift.Error) -> (Swift.Void))?) -> (LocalzMobileSDK.MessageData?)
+  public func updateLastSeen()
+  public typealias ID = Swift.String
+}
+public struct EventData {
+  public var message: LocalzMobileSDK.MessageData?
+  public var event: LocalzMobileSDK.ChatMyWayEvents
+  public var channelId: Swift.String?
+  public var totalDocs: Swift.Double?
+}
+extension Contact : Swift.Identifiable {
+  public var id: Swift.String {
+    get
+  }
+  public typealias ID = Swift.String
+}
+@_hasMissingDesignatedInitializers public class MessageListener {
+  public func reload(next: Swift.String? = nil, fromMessageId: Swift.String? = nil)
+  public func start()
+  public func stop()
+  @objc deinit
+}
+extension MessageData : Swift.Identifiable {
+  public var id: Swift.String {
+    get
+  }
+  public var isSending: Swift.Bool {
+    get
+  }
+  public var isCurrentUser: Swift.Bool {
+    get
+  }
+  public typealias ID = Swift.String
+}
+extension AssignedOrder : Swift.Identifiable {
+  public var id: Swift.String {
+    get
+  }
+  public typealias ID = Swift.String
+}
+public enum ChatChannelSendStatus : Swift.String {
+  case SENDING
+  case ERROR
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct LocationData {
+  public var location: CoreLocation.CLLocation
+  public var updateDate: Foundation.Date
+}
+@_hasMissingDesignatedInitializers public class ChatMyWayClient {
+  public static let NavigateToMessage: Foundation.Notification.Name
+  public static let NewMessage: Foundation.Notification.Name
+  public static let ChannelClosed: Foundation.Notification.Name
+  public static let shared: LocalzMobileSDK.ChatMyWayClient
+  public var isInitialized: Swift.Bool {
+    get
+  }
+  public var deviceId: Swift.String? {
+    get
+    set
+  }
+  @objc deinit
+  public func chatChannels(withOrdersFrom startDate: Foundation.Date = Date(), to endDate: Foundation.Date? = nil, onSuccess: (([LocalzMobileSDK.ChatChannel]?) -> (Swift.Void))?, onFailure: ((Swift.Error) -> (Swift.Void))?)
+  public func chatChannelById(channelId: Swift.String, onSuccess: @escaping ((LocalzMobileSDK.ChatChannel) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void)))
+  public func createChatChannelListListener(withOrdersFrom startDate: Foundation.Date = Date(), to endDate: Foundation.Date? = nil, onUpdate: @escaping (([LocalzMobileSDK.ChatChannel]?) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void))) -> LocalzMobileSDK.ChatChannelListListener
+  public func assignedOrders(from startDate: Foundation.Date = Date(), to endDate: Foundation.Date? = nil, onSuccess: (([LocalzMobileSDK.AssignedOrder]?) -> (Swift.Void))?, onFailure: ((Swift.Error) -> (Swift.Void))?)
+  public func createAssignedOrderListListener(withOrdersFrom startDate: Foundation.Date = Date(), to endDate: Foundation.Date? = nil, onUpdate: @escaping (([LocalzMobileSDK.AssignedOrder]?) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void))) -> LocalzMobileSDK.AssignedOrderListListener
+  public func contactList(onSuccess: (([LocalzMobileSDK.Contact]?) -> (Swift.Void))?, onFailure: ((Swift.Error) -> (Swift.Void))?)
+  public func sendMessage(siteId: Swift.String? = nil, orderDetails: (orderNumber: Swift.String, subProjectId: Swift.String?)?, text: Swift.String, onSuccess: ((LocalzMobileSDK.MessageData?) -> (Swift.Void))?, onFailure: ((Swift.Error) -> (Swift.Void))?) -> (LocalzMobileSDK.MessageData?)
+  public func handleRemoteNotification(userInfo: [Swift.AnyHashable : Any])
+  public func userInfoToMessageData(userInfo: [Swift.AnyHashable : Any]) -> LocalzMobileSDK.MessageData?
+}
+@objc @_inheritsConvenienceInitializers public class BackgroundLocationManager : ObjectiveC.NSObject, CoreLocation.CLLocationManagerDelegate {
+  public var lastLocationUpdate: Foundation.Date?
+  public var lastUserLocation: CoreLocation.CLLocation?
+  public var isStarted: Swift.Bool
+  @objc override dynamic public init()
+  @objc deinit
+  @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
+  @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didFailWithError error: Swift.Error)
+  @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didFinishDeferredUpdatesWithError error: Swift.Error?)
+  @objc public func locationManagerDidChangeAuthorization(_ manager: CoreLocation.CLLocationManager)
+}
+public struct CurrentUser : Swift.Codable, Swift.Hashable {
+  public init(userId: Swift.String, username: Swift.String, firstName: Swift.String? = nil, lastName: Swift.String? = nil)
+  public var userId: Swift.String
+  public var username: Swift.String
+  public var firstName: Swift.String?
+  public var lastName: Swift.String?
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: LocalzMobileSDK.CurrentUser, b: LocalzMobileSDK.CurrentUser) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: Swift.Decoder) throws
+}
+extension LocalzMobileSDK.PermissionStatus : Swift.Equatable {}
+extension LocalzMobileSDK.PermissionStatus : Swift.Hashable {}
+extension LocalzMobileSDK.PermissionStatus : Swift.RawRepresentable {}
+extension LocalzMobileSDK.CapabilityType : Swift.Equatable {}
+extension LocalzMobileSDK.CapabilityType : Swift.Hashable {}
+extension LocalzMobileSDK.CapabilityType : Swift.RawRepresentable {}
+extension LocalzMobileSDK.Environment : Swift.Equatable {}
+extension LocalzMobileSDK.Environment : Swift.Hashable {}
+extension LocalzMobileSDK.RLog.Log : Swift.Equatable {}
+extension LocalzMobileSDK.RLog.Log : Swift.Hashable {}
+extension LocalzMobileSDK.RLog.Log : Swift.RawRepresentable {}
+extension LocalzMobileSDK.MobileClient.AppType : Swift.Equatable {}
+extension LocalzMobileSDK.MobileClient.AppType : Swift.Hashable {}
+extension LocalzMobileSDK.MobileClient.SDKState : Swift.Equatable {}
+extension LocalzMobileSDK.MobileClient.SDKState : Swift.Hashable {}
+extension LocalzMobileSDK.MobileClient.NetworkState : Swift.Equatable {}
+extension LocalzMobileSDK.MobileClient.NetworkState : Swift.Hashable {}
+extension LocalzMobileSDK.ChatChannelSendStatus : Swift.Equatable {}
+extension LocalzMobileSDK.ChatChannelSendStatus : Swift.Hashable {}
+extension LocalzMobileSDK.ChatChannelSendStatus : Swift.RawRepresentable {}

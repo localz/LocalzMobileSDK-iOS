@@ -1,0 +1,2 @@
+# LocalzMobileSDK-iOS (Preview release)
+
