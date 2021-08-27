@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
-// swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LocalzMobileSDK
+// swift-module-flags: -target x86_64-apple-ios14.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LocalzMobileSDK
 import Apollo
 import CoreLocation
 import CoreMotion
@@ -96,6 +96,7 @@ public struct ChatChannelMessages {
 public class MobileClient {
   public static let NetworkStatusChange: Foundation.Notification.Name
   public static let PermissionUpdated: Foundation.Notification.Name
+  public static let SessionLoggedIn: Foundation.Notification.Name
   public static let SessionLoggedOut: Foundation.Notification.Name
   public static let SDKStateUpdate: Foundation.Notification.Name
   public static let version: Swift.String
@@ -119,6 +120,14 @@ public class MobileClient {
     public static func == (a: LocalzMobileSDK.MobileClient.SDKState, b: LocalzMobileSDK.MobileClient.SDKState) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum SDKOptionKey : Swift.String {
+    case USE_SANDBOX_APNS
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
       get
     }
   }
@@ -150,8 +159,8 @@ public class MobileClient {
     get
   }
   public init()
-  public static func setup(appType: LocalzMobileSDK.MobileClient.AppType = .Both, projectId: Swift.String, attendantKey: Swift.String, pushKey: Swift.String, env: LocalzMobileSDK.Environment = .PRD) throws
-  public static func setup(appType: LocalzMobileSDK.MobileClient.AppType = .Both, key: Swift.String, env: LocalzMobileSDK.Environment = .PRD) throws
+  public static func setup(appType: LocalzMobileSDK.MobileClient.AppType = .Both, projectId: Swift.String, attendantKey: Swift.String, pushKey: Swift.String, env: LocalzMobileSDK.Environment = .PRD, options: [LocalzMobileSDK.MobileClient.SDKOptionKey : Any]? = nil) throws
+  public static func setup(appType: LocalzMobileSDK.MobileClient.AppType = .Both, key: Swift.String, env: LocalzMobileSDK.Environment = .PRD, options: [LocalzMobileSDK.MobileClient.SDKOptionKey : Any]? = nil) throws
   public func login(username: Swift.String!, password: Swift.String!, registerDevice: Swift.Bool = true, onSuccess: @escaping ((LocalzMobileSDK.CurrentUser) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void)))
   public func logout()
   public func currentUser() -> LocalzMobileSDK.CurrentUser?
@@ -3711,6 +3720,9 @@ extension LocalzMobileSDK.MobileClient.AppType : Swift.Equatable {}
 extension LocalzMobileSDK.MobileClient.AppType : Swift.Hashable {}
 extension LocalzMobileSDK.MobileClient.SDKState : Swift.Equatable {}
 extension LocalzMobileSDK.MobileClient.SDKState : Swift.Hashable {}
+extension LocalzMobileSDK.MobileClient.SDKOptionKey : Swift.Equatable {}
+extension LocalzMobileSDK.MobileClient.SDKOptionKey : Swift.Hashable {}
+extension LocalzMobileSDK.MobileClient.SDKOptionKey : Swift.RawRepresentable {}
 extension LocalzMobileSDK.MobileClient.NetworkState : Swift.Equatable {}
 extension LocalzMobileSDK.MobileClient.NetworkState : Swift.Hashable {}
 extension LocalzMobileSDK.ChatChannelSendStatus : Swift.Equatable {}
