@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|  
     s.name              = 'LocalzMobileSDK'
-    s.version           = '1.2.0'
+    s.version           = '1.3.0'
     s.summary           = 'Localz MobileSDK'
     s.homepage          = 'https://www.localz.com'
     s.author            = { 'Localz Pty Ltd' => 'hello@localz.com' }
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = '14.0'
 
     s.ios.vendored_frameworks = 'Sources/LocalzMobileSDK.xcframework'
-    s.dependency 'Apollo', '0.48.0'
+    s.dependency 'Apollo', '0.49.1'
     s.dependency 'Apollo/SQLite'
     s.dependency 'Apollo/WebSocket'
 end 
