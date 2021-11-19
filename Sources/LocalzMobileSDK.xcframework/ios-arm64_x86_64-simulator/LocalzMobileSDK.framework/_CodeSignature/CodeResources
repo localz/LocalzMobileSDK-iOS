@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/LocalzMobileSDK-Swift.h</key>
 		<data>
-		P7TIjjrkxYgGdo4oEKOideCP0+w=
+		cxmz85maQtp3Z49xRQNLacBqo9k=
 		</data>
 		<key>Headers/LocalzMobileSDK.h</key>
 		<data>
@@ -14,71 +14,71 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		w42CaRQglqacKYbSOEhE/cS/ucQ=
+		d2RHtxsvND8dq5bZ0ZncBfiCB04=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		QyYivSef1iwCFnJVFEhOhTCyXE4=
+		1YDNcDsnnoVhl3Li8xCK2qbnLY0=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		QyYivSef1iwCFnJVFEhOhTCyXE4=
+		1YDNcDsnnoVhl3Li8xCK2qbnLY0=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		eMmEw97ZvFGS2b+xmpUk+EGzSmo=
+		x5sQfMkj7yDG5j0yiQcvB+O1Jqg=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<data>
-		eMmEw97ZvFGS2b+xmpUk+EGzSmo=
+		x5sQfMkj7yDG5j0yiQcvB+O1Jqg=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		croeqhQSepXJWGtws3WUvJkjRW4=
+		iADnYF2FVsrBO4WZozwH8R1+cds=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		ZHtKMpfWVkps6vQobBE0+B9j9OA=
+		DMiQxhqaOlo2iEHe67kqeaZ5CSc=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		qpFTYpCw8oE3nX7XzBvaCGVuCNE=
+		/LGZx4m+Fb/aSt0KeGpc7xLeT60=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		croeqhQSepXJWGtws3WUvJkjRW4=
+		iADnYF2FVsrBO4WZozwH8R1+cds=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		ZHtKMpfWVkps6vQobBE0+B9j9OA=
+		DMiQxhqaOlo2iEHe67kqeaZ5CSc=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		qpFTYpCw8oE3nX7XzBvaCGVuCNE=
+		/LGZx4m+Fb/aSt0KeGpc7xLeT60=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		PBTz2R1NxzI9W7/w9VEXNKcqNzw=
+		0qleNuZxEJMNUS91SbyQNCV0zsc=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		VtE5AaqK05SZmzoFcaTO0XJ4rP0=
+		vPSwPV/myiQ5T9QropoFaXTNrnw=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		oKn4mah9UGZPsAokNvhu2T6347A=
+		29MubCqGYjzVjJs/gD7x9/LQSGk=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		PBTz2R1NxzI9W7/w9VEXNKcqNzw=
+		0qleNuZxEJMNUS91SbyQNCV0zsc=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		VtE5AaqK05SZmzoFcaTO0XJ4rP0=
+		vPSwPV/myiQ5T9QropoFaXTNrnw=
 		</data>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		oKn4mah9UGZPsAokNvhu2T6347A=
+		29MubCqGYjzVjJs/gD7x9/LQSGk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -91,7 +91,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			K+xc6s5GBf+3QsQIS/EvkafGIeDk7Q8rwCckpWkDQZ4=
+			+G13sDxW9w+218w4TkbWNgNA7Q9EK1S3aak7AcK/yek=
 			</data>
 		</dict>
 		<key>Headers/LocalzMobileSDK.h</key>
@@ -105,112 +105,112 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			K6EHFFUGkTGiHf6K+L+kUQv+pR5wANqB4fDYZE6LSWQ=
+			rrQDXX4F/SS5ab+QQuJPKM2dBuA4Ob18A4ZUG3oDtKk=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			K6EHFFUGkTGiHf6K+L+kUQv+pR5wANqB4fDYZE6LSWQ=
+			rrQDXX4F/SS5ab+QQuJPKM2dBuA4Ob18A4ZUG3oDtKk=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			b0uk3kQJkdGarYcdAUhH9kyoMoId+lxgCbsPEnDMxwg=
+			AGOwiSiiFave50ccITsUvt0f+puNeSs2Q8LRPm1Lmyc=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			b0uk3kQJkdGarYcdAUhH9kyoMoId+lxgCbsPEnDMxwg=
+			AGOwiSiiFave50ccITsUvt0f+puNeSs2Q8LRPm1Lmyc=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FomJAW9eJByjJvkXrwHYvXZlQXuqz7mpm8RoDimEHZQ=
+			x3YGOHsvJ+tbiuHUInYGc1z4FO7do3ZljBSNMvqJb/k=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4IG3hGTJB+2x8UdKb1r31KapzgQE6Wz3ZDukbitW8lA=
+			pfbJ8KVlqYKZSZoRuI/I6G2qMTiIr/5t4mhOkzzWBNU=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0qM0z+xEtPj0i4mC706RDP0LSnX7PSWuYEkVSYuwn1Y=
+			xkTMyJutLZh6UBR554EUiH4WcwZLhYcUU435deGb0GU=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FomJAW9eJByjJvkXrwHYvXZlQXuqz7mpm8RoDimEHZQ=
+			x3YGOHsvJ+tbiuHUInYGc1z4FO7do3ZljBSNMvqJb/k=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4IG3hGTJB+2x8UdKb1r31KapzgQE6Wz3ZDukbitW8lA=
+			pfbJ8KVlqYKZSZoRuI/I6G2qMTiIr/5t4mhOkzzWBNU=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0qM0z+xEtPj0i4mC706RDP0LSnX7PSWuYEkVSYuwn1Y=
+			xkTMyJutLZh6UBR554EUiH4WcwZLhYcUU435deGb0GU=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			l6eyAe0fX1Zj0X/Y89pK+BQc+ZSXfe8cxX+3X/xr4ko=
+			ClyhOyc+WJ3g/5kSahKO19Vhe4KO2ZGIofzWWmPI2CI=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Q07fKHyV7EV/uJJUshAsy/lGsYiAq1ZGScLbaSFGhnQ=
+			bu7CtNAHjSS35oK+I2EWe7Ds5kl5pxsfVZ6j2nWjfJA=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			A3JIY4fWGCihLn1o01dx2PHvli7sDy5HLpbWzBabOkI=
+			au2cyv1zc3Xbg85nFQY5r/08yjEOi8bIlZASCLdRFDs=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			l6eyAe0fX1Zj0X/Y89pK+BQc+ZSXfe8cxX+3X/xr4ko=
+			ClyhOyc+WJ3g/5kSahKO19Vhe4KO2ZGIofzWWmPI2CI=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Q07fKHyV7EV/uJJUshAsy/lGsYiAq1ZGScLbaSFGhnQ=
+			bu7CtNAHjSS35oK+I2EWe7Ds5kl5pxsfVZ6j2nWjfJA=
 			</data>
 		</dict>
 		<key>Modules/LocalzMobileSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			A3JIY4fWGCihLn1o01dx2PHvli7sDy5HLpbWzBabOkI=
+			au2cyv1zc3Xbg85nFQY5r/08yjEOi8bIlZASCLdRFDs=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

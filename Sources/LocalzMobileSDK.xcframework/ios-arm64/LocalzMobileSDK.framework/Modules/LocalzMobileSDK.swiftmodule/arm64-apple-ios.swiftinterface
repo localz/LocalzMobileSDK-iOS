@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
+// swift-compiler-version: Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)
 // swift-module-flags: -target arm64-apple-ios14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LocalzMobileSDK
 import Apollo
 import CoreLocation
@@ -182,6 +182,15 @@ public class MobileClient {
   public func notificationHandler(userInfo: [Swift.AnyHashable : Any])
   public func networkChange(onChange: @escaping (LocalzMobileSDK.MobileClient.NetworkState) -> (Swift.Void))
   public func retrieveBGAppConfig(onSuccess: ((LocalzMobileSDK.BackgroundConfig) -> Swift.Void)!, onFailure: ((Swift.Error) -> Swift.Void)!)
+  @objc deinit
+}
+public class OrderManagement {
+  public static var shared: LocalzMobileSDK.OrderManagement
+  public var isInitialized: Swift.Bool {
+    get
+  }
+  public init()
+  public func getOrderData(orderNumber: Swift.String!, subProjectId: Swift.String? = nil, forceReload: Swift.Bool = false, onSuccess: @escaping ((LocalzMobileSDK.OrderData?) -> (Swift.Void)), onFailure: ((Swift.Error) -> (Swift.Void))?)
   @objc deinit
 }
 final public class BackgroundAppFeatureQuery : Apollo.GraphQLQuery {
@@ -674,6 +683,18 @@ public struct GetMessagesByChannelIdInput : Apollo.GraphQLMapConvertible {
     set
   }
   public var messageId: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+}
+public struct GetOrderDataInput : Apollo.GraphQLMapConvertible {
+  public var graphQLMap: Apollo.GraphQLMap
+  public init(orderNumber: Swift.String, subProjectId: Swift.Optional<Swift.String?> = nil)
+  public var orderNumber: Swift.String {
+    get
+    set
+  }
+  public var subProjectId: Swift.Optional<Swift.String?> {
     get
     set
   }
@@ -2637,6 +2658,229 @@ final public class GetMessagesByChannelIdQuery : Apollo.GraphQLQuery {
   }
   @objc deinit
 }
+final public class GetOrderDataQuery : Apollo.GraphQLQuery {
+  final public let operationDefinition: Swift.String
+  final public let operationName: Swift.String
+  final public var queryDocument: Swift.String {
+    get
+  }
+  final public var getOrderDataInput: LocalzMobileSDK.GetOrderDataInput
+  public init(getOrderDataInput: LocalzMobileSDK.GetOrderDataInput)
+  final public var variables: Apollo.GraphQLMap? {
+    get
+  }
+  public struct Data : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(getOrderData: LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum)
+    public var getOrderData: LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum {
+      get
+      set
+    }
+    public struct GetOrderDatum : Apollo.GraphQLSelectionSet {
+      public static let possibleTypes: [Swift.String]
+      public static var selections: [Apollo.GraphQLSelection] {
+        get
+      }
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public init(trackId: Swift.String? = nil, orderNumber: Swift.String, subProjectId: Swift.String? = nil, address: LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum.Address? = nil, allocatedUser: LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum.AllocatedUser? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes, orderDate: LocalzMobileSDK.DateTime? = nil, specific: Apollo.JSONObject? = nil, deliveryName: Swift.String? = nil, comments: [LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum.Comment]? = nil)
+      public var __typename: Swift.String {
+        get
+        set
+      }
+      public var trackId: Swift.String? {
+        get
+        set
+      }
+      public var orderNumber: Swift.String {
+        get
+        set
+      }
+      public var subProjectId: Swift.String? {
+        get
+        set
+      }
+      public var address: LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum.Address? {
+        get
+        set
+      }
+      public var allocatedUser: LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum.AllocatedUser? {
+        get
+        set
+      }
+      public var orderStatus: LocalzMobileSDK.OrderStatusTypes {
+        get
+        set
+      }
+      public var orderDate: LocalzMobileSDK.DateTime? {
+        get
+        set
+      }
+      public var specific: Apollo.JSONObject? {
+        get
+        set
+      }
+      public var deliveryName: Swift.String? {
+        get
+        set
+      }
+      public var comments: [LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum.Comment]? {
+        get
+        set
+      }
+      public var fragments: LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum.Fragments {
+        get
+        set
+      }
+      public struct Fragments {
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public var orderData: LocalzMobileSDK.OrderData {
+          get
+          set
+        }
+      }
+      public struct Address : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(streetAddress: Swift.String? = nil, subStreetAddress: Swift.String? = nil, region: Swift.String? = nil, locality: Swift.String? = nil, postcode: Swift.String? = nil, country: Swift.String? = nil, geoJson: LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum.Address.GeoJson? = nil)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var streetAddress: Swift.String? {
+          get
+          set
+        }
+        public var subStreetAddress: Swift.String? {
+          get
+          set
+        }
+        public var region: Swift.String? {
+          get
+          set
+        }
+        public var locality: Swift.String? {
+          get
+          set
+        }
+        public var postcode: Swift.String? {
+          get
+          set
+        }
+        public var country: Swift.String? {
+          get
+          set
+        }
+        public var geoJson: LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum.Address.GeoJson? {
+          get
+          set
+        }
+        public struct GeoJson : Apollo.GraphQLSelectionSet {
+          public static let possibleTypes: [Swift.String]
+          public static var selections: [Apollo.GraphQLSelection] {
+            get
+          }
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public init(coordinates: [Swift.Double])
+          public var __typename: Swift.String {
+            get
+            set
+          }
+          public var coordinates: [Swift.Double] {
+            get
+            set
+          }
+        }
+      }
+      public struct AllocatedUser : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(firstName: Swift.String? = nil, lastName: Swift.String? = nil)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var firstName: Swift.String? {
+          get
+          set
+        }
+        public var lastName: Swift.String? {
+          get
+          set
+        }
+      }
+      public struct Comment : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(text: Swift.String, dateTime: LocalzMobileSDK.DateTime, isCustomer: Swift.Bool)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var text: Swift.String {
+          get
+          set
+        }
+        public var dateTime: LocalzMobileSDK.DateTime {
+          get
+          set
+        }
+        public var isCustomer: Swift.Bool {
+          get
+          set
+        }
+        public var fragments: LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum.Comment.Fragments {
+          get
+          set
+        }
+        public struct Fragments {
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public var comment: LocalzMobileSDK.GetOrderDataQuery.Data.GetOrderDatum.Comment {
+            get
+            set
+          }
+        }
+      }
+    }
+  }
+  @objc deinit
+}
 final public class GetOrdersQuery : Apollo.GraphQLQuery {
   final public let operationDefinition: Swift.String
   final public let operationName: Swift.String
@@ -2671,7 +2915,7 @@ final public class GetOrdersQuery : Apollo.GraphQLQuery {
         get
       }
       public init(unsafeResultMap: Apollo.ResultMap)
-      public init(trackId: Swift.String? = nil, orderNumber: Swift.String, subProjectId: Swift.String? = nil, address: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Address? = nil, allocatedUser: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.AllocatedUser? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes, orderDate: LocalzMobileSDK.DateTime? = nil, specific: Apollo.JSONObject? = nil, deliveryName: Swift.String? = nil)
+      public init(trackId: Swift.String? = nil, orderNumber: Swift.String, subProjectId: Swift.String? = nil, address: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Address? = nil, allocatedUser: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.AllocatedUser? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes, orderDate: LocalzMobileSDK.DateTime? = nil, specific: Apollo.JSONObject? = nil, deliveryName: Swift.String? = nil, comments: [LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Comment]? = nil)
       public var __typename: Swift.String {
         get
         set
@@ -2712,6 +2956,10 @@ final public class GetOrdersQuery : Apollo.GraphQLQuery {
         get
         set
       }
+      public var comments: [LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Comment]? {
+        get
+        set
+      }
       public var fragments: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Fragments {
         get
         set
@@ -2721,7 +2969,7 @@ final public class GetOrdersQuery : Apollo.GraphQLQuery {
           get
         }
         public init(unsafeResultMap: Apollo.ResultMap)
-        public var detailedOrder: LocalzMobileSDK.DetailedOrder {
+        public var orderData: LocalzMobileSDK.OrderData {
           get
           set
         }
@@ -2809,6 +3057,47 @@ final public class GetOrdersQuery : Apollo.GraphQLQuery {
         public var lastName: Swift.String? {
           get
           set
+        }
+      }
+      public struct Comment : Apollo.GraphQLSelectionSet {
+        public static let possibleTypes: [Swift.String]
+        public static var selections: [Apollo.GraphQLSelection] {
+          get
+        }
+        public var resultMap: Apollo.ResultMap {
+          get
+        }
+        public init(unsafeResultMap: Apollo.ResultMap)
+        public init(text: Swift.String, dateTime: LocalzMobileSDK.DateTime, isCustomer: Swift.Bool)
+        public var __typename: Swift.String {
+          get
+          set
+        }
+        public var text: Swift.String {
+          get
+          set
+        }
+        public var dateTime: LocalzMobileSDK.DateTime {
+          get
+          set
+        }
+        public var isCustomer: Swift.Bool {
+          get
+          set
+        }
+        public var fragments: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Comment.Fragments {
+          get
+          set
+        }
+        public struct Fragments {
+          public var resultMap: Apollo.ResultMap {
+            get
+          }
+          public init(unsafeResultMap: Apollo.ResultMap)
+          public var comment: LocalzMobileSDK.GetOrdersQuery.Data.GetOrder.Comment {
+            get
+            set
+          }
         }
       }
     }
@@ -3662,7 +3951,7 @@ public struct MessageData : Apollo.GraphQLFragment {
     set
   }
 }
-public struct DetailedOrder : Apollo.GraphQLFragment {
+public struct OrderData : Apollo.GraphQLFragment {
   public static let fragmentDefinition: Swift.String
   public static let possibleTypes: [Swift.String]
   public static var selections: [Apollo.GraphQLSelection] {
@@ -3672,7 +3961,7 @@ public struct DetailedOrder : Apollo.GraphQLFragment {
     get
   }
   public init(unsafeResultMap: Apollo.ResultMap)
-  public init(trackId: Swift.String? = nil, orderNumber: Swift.String, subProjectId: Swift.String? = nil, address: LocalzMobileSDK.DetailedOrder.Address? = nil, allocatedUser: LocalzMobileSDK.DetailedOrder.AllocatedUser? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes, orderDate: LocalzMobileSDK.DateTime? = nil, specific: Apollo.JSONObject? = nil, deliveryName: Swift.String? = nil)
+  public init(trackId: Swift.String? = nil, orderNumber: Swift.String, subProjectId: Swift.String? = nil, address: LocalzMobileSDK.OrderData.Address? = nil, allocatedUser: LocalzMobileSDK.OrderData.AllocatedUser? = nil, orderStatus: LocalzMobileSDK.OrderStatusTypes, orderDate: LocalzMobileSDK.DateTime? = nil, specific: Apollo.JSONObject? = nil, deliveryName: Swift.String? = nil, comments: [LocalzMobileSDK.OrderData.Comment]? = nil)
   public var __typename: Swift.String {
     get
     set
@@ -3689,11 +3978,11 @@ public struct DetailedOrder : Apollo.GraphQLFragment {
     get
     set
   }
-  public var address: LocalzMobileSDK.DetailedOrder.Address? {
+  public var address: LocalzMobileSDK.OrderData.Address? {
     get
     set
   }
-  public var allocatedUser: LocalzMobileSDK.DetailedOrder.AllocatedUser? {
+  public var allocatedUser: LocalzMobileSDK.OrderData.AllocatedUser? {
     get
     set
   }
@@ -3713,6 +4002,10 @@ public struct DetailedOrder : Apollo.GraphQLFragment {
     get
     set
   }
+  public var comments: [LocalzMobileSDK.OrderData.Comment]? {
+    get
+    set
+  }
   public struct Address : Apollo.GraphQLSelectionSet {
     public static let possibleTypes: [Swift.String]
     public static var selections: [Apollo.GraphQLSelection] {
@@ -3722,7 +4015,7 @@ public struct DetailedOrder : Apollo.GraphQLFragment {
       get
     }
     public init(unsafeResultMap: Apollo.ResultMap)
-    public init(streetAddress: Swift.String? = nil, subStreetAddress: Swift.String? = nil, region: Swift.String? = nil, locality: Swift.String? = nil, postcode: Swift.String? = nil, country: Swift.String? = nil, geoJson: LocalzMobileSDK.DetailedOrder.Address.GeoJson? = nil)
+    public init(streetAddress: Swift.String? = nil, subStreetAddress: Swift.String? = nil, region: Swift.String? = nil, locality: Swift.String? = nil, postcode: Swift.String? = nil, country: Swift.String? = nil, geoJson: LocalzMobileSDK.OrderData.Address.GeoJson? = nil)
     public var __typename: Swift.String {
       get
       set
@@ -3751,7 +4044,7 @@ public struct DetailedOrder : Apollo.GraphQLFragment {
       get
       set
     }
-    public var geoJson: LocalzMobileSDK.DetailedOrder.Address.GeoJson? {
+    public var geoJson: LocalzMobileSDK.OrderData.Address.GeoJson? {
       get
       set
     }
@@ -3797,6 +4090,75 @@ public struct DetailedOrder : Apollo.GraphQLFragment {
       get
       set
     }
+  }
+  public struct Comment : Apollo.GraphQLSelectionSet {
+    public static let possibleTypes: [Swift.String]
+    public static var selections: [Apollo.GraphQLSelection] {
+      get
+    }
+    public var resultMap: Apollo.ResultMap {
+      get
+    }
+    public init(unsafeResultMap: Apollo.ResultMap)
+    public init(text: Swift.String, dateTime: LocalzMobileSDK.DateTime, isCustomer: Swift.Bool)
+    public var __typename: Swift.String {
+      get
+      set
+    }
+    public var text: Swift.String {
+      get
+      set
+    }
+    public var dateTime: LocalzMobileSDK.DateTime {
+      get
+      set
+    }
+    public var isCustomer: Swift.Bool {
+      get
+      set
+    }
+    public var fragments: LocalzMobileSDK.OrderData.Comment.Fragments {
+      get
+      set
+    }
+    public struct Fragments {
+      public var resultMap: Apollo.ResultMap {
+        get
+      }
+      public init(unsafeResultMap: Apollo.ResultMap)
+      public var comment: LocalzMobileSDK.OrderData.Comment {
+        get
+        set
+      }
+    }
+  }
+}
+public struct Comment : Apollo.GraphQLFragment {
+  public static let fragmentDefinition: Swift.String
+  public static let possibleTypes: [Swift.String]
+  public static var selections: [Apollo.GraphQLSelection] {
+    get
+  }
+  public var resultMap: Apollo.ResultMap {
+    get
+  }
+  public init(unsafeResultMap: Apollo.ResultMap)
+  public init(text: Swift.String, dateTime: LocalzMobileSDK.DateTime, isCustomer: Swift.Bool)
+  public var __typename: Swift.String {
+    get
+    set
+  }
+  public var text: Swift.String {
+    get
+    set
+  }
+  public var dateTime: LocalzMobileSDK.DateTime {
+    get
+    set
+  }
+  public var isCustomer: Swift.Bool {
+    get
+    set
   }
 }
 public struct Site : Apollo.GraphQLFragment {
