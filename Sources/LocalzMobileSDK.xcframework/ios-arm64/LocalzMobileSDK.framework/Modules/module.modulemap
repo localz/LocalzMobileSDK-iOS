@@ -6,6 +6,6 @@ framework module LocalzMobileSDK {
 }
 
 module LocalzMobileSDK.Swift {
-    header "LocalzMobileSDK-Swift.h"
-    requires objc
+  header "LocalzMobileSDK-Swift.h"
+  requires objc
 }

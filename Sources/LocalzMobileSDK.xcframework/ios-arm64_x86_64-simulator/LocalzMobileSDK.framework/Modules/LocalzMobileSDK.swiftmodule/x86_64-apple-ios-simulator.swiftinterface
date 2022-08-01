@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)
+// swift-compiler-version: Apple Swift version 5.7 (swiftlang-5.7.0.123.7 clang-1400.0.29.50)
 // swift-module-flags: -target x86_64-apple-ios14.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LocalzMobileSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
 import Apollo
 import CoreLocation
 import CoreMotion
@@ -11,6 +12,21 @@ import Swift
 import UIKit
 import UserNotifications
 import _Concurrency
+import _StringProcessing
+public enum JWTDecodeError : Foundation.LocalizedError, Swift.CustomDebugStringConvertible {
+  case invalidBase64URL(Swift.String)
+  case invalidJSON(Swift.String)
+  case invalidPartCount(Swift.String, Swift.Int)
+  public var localizedDescription: Swift.String {
+    get
+  }
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var debugDescription: Swift.String {
+    get
+  }
+}
 @_hasMissingDesignatedInitializers public class AssignedOrderListListener {
   public func start()
   public func stop()
@@ -60,6 +76,16 @@ public enum Environment {
     get
   }
 }
+public enum APPTYPE {
+  case BackgroundApp
+  case ChatMyWay
+  case Both
+  public static func == (a: LocalzMobileSDK.APPTYPE, b: LocalzMobileSDK.APPTYPE) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 extension Foundation.DateFormatter {
   public static let hourDateFormatter: Foundation.DateFormatter
 }
@@ -104,16 +130,6 @@ public class MobileClient {
   public static let SDKStateUpdate: Foundation.Notification.Name
   public static let shared: LocalzMobileSDK.MobileClient
   public var enableOnDutyStatusLocalPush: Swift.Bool
-  public enum AppType {
-    case BackgroundApp
-    case ChatMyWay
-    case Both
-    public static func == (a: LocalzMobileSDK.MobileClient.AppType, b: LocalzMobileSDK.MobileClient.AppType) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
   public enum SDKState {
     case UNINITIALIZED
     case INITIALIZED
@@ -145,29 +161,23 @@ public class MobileClient {
       get
     }
   }
-  public var appType: LocalzMobileSDK.MobileClient.AppType? {
-    get
-  }
   public var isInitialized: Swift.Bool {
-    get
-  }
-  public var isBackgroundApp: Swift.Bool {
-    get
-  }
-  public var isChatMyWay: Swift.Bool {
     get
   }
   public var currentNetworkState: LocalzMobileSDK.MobileClient.NetworkState {
     get
   }
   public init()
-  public static func setup(appType: LocalzMobileSDK.MobileClient.AppType = .Both, projectId: Swift.String, attendantKey: Swift.String, pushKey: Swift.String, env: LocalzMobileSDK.Environment = .PRD, options: [LocalzMobileSDK.MobileClient.SDKOptionKey : Any]? = nil) throws
-  public static func setup(appType: LocalzMobileSDK.MobileClient.AppType = .Both, key: Swift.String, env: LocalzMobileSDK.Environment = .PRD, options: [LocalzMobileSDK.MobileClient.SDKOptionKey : Any]? = nil) throws
+  public static func setup(appType: LocalzMobileSDK.APPTYPE = .Both, projectId: Swift.String, attendantKey: Swift.String, pushKey: Swift.String, env: LocalzMobileSDK.Environment = .PRD, options: [LocalzMobileSDK.MobileClient.SDKOptionKey : Any]? = nil) throws
+  public static func setup(appType: LocalzMobileSDK.APPTYPE = .Both, key: Swift.String, env: LocalzMobileSDK.Environment = .PRD, options: [LocalzMobileSDK.MobileClient.SDKOptionKey : Any]? = nil) throws
   public func login(username: Swift.String!, password: Swift.String!, registerDevice: Swift.Bool = true, forceLogout force: Swift.Bool? = true, onSuccess: @escaping ((LocalzMobileSDK.CurrentUser) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void)))
   public func ssoLogin(provider: LocalzMobileSDK.SSOProviders, idToken: Swift.String? = nil, code: Swift.String? = nil, accessToken: Swift.String? = nil, refreshToken: Swift.String? = nil, force: Swift.Bool? = true, onSuccess: @escaping ((LocalzMobileSDK.CurrentUser) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void)))
   public func logout()
   public func currentUser() -> LocalzMobileSDK.CurrentUser?
   public func deviceId() -> Swift.String?
+  public func appType() -> LocalzMobileSDK.APPTYPE
+  public func isBackgroundApp() -> Swift.Bool
+  public func isChatMyWay() -> Swift.Bool
   public func shouldAskPermissions() -> [LocalzMobileSDK.CapabilityType]
   public func registerPushToken(deviceToken: Foundation.Data)
   public func isNotificationAuthorized() -> Swift.Bool
@@ -359,6 +369,26 @@ public struct BackgroundConfig : Apollo.GraphQLFragment {
       get
       set
     }
+  }
+}
+public protocol JWT {
+  var header: [Swift.String : Any] { get }
+  var body: [Swift.String : Any] { get }
+  var signature: Swift.String? { get }
+  var string: Swift.String { get }
+  var expiresAt: Foundation.Date? { get }
+  var issuer: Swift.String? { get }
+  var subject: Swift.String? { get }
+  var audience: [Swift.String]? { get }
+  var issuedAt: Foundation.Date? { get }
+  var notBefore: Foundation.Date? { get }
+  var identifier: Swift.String? { get }
+  var expired: Swift.Bool { get }
+}
+extension LocalzMobileSDK.JWT {
+  public func claim(name: Swift.String) -> LocalzMobileSDK.Claim
+  public subscript(claim: Swift.String) -> LocalzMobileSDK.Claim {
+    get
   }
 }
 @_hasMissingDesignatedInitializers public class ChatChannelListListener {
@@ -4289,7 +4319,6 @@ public struct LocationData {
     get
     set
   }
-  @objc deinit
   public func chatChannels(withOrdersFrom startDate: Foundation.Date = Date(), to endDate: Foundation.Date? = nil, onSuccess: (([LocalzMobileSDK.ChatChannel]?) -> (Swift.Void))?, onFailure: ((Swift.Error) -> (Swift.Void))?)
   public func chatChannelById(channelId: Swift.String, onSuccess: @escaping ((LocalzMobileSDK.ChatChannel) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void)))
   public func createChatChannelListListener(withOrdersFrom startDate: Foundation.Date = Date(), to endDate: Foundation.Date? = nil, onUpdate: @escaping (([LocalzMobileSDK.ChatChannel]?) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void))) -> LocalzMobileSDK.ChatChannelListListener
@@ -4299,6 +4328,7 @@ public struct LocationData {
   public func sendMessage(siteId: Swift.String? = nil, orderDetails: (orderNumber: Swift.String, subProjectId: Swift.String?)?, text: Swift.String, onSuccess: ((LocalzMobileSDK.MessageData?) -> (Swift.Void))?, onFailure: ((Swift.Error) -> (Swift.Void))?) -> (LocalzMobileSDK.MessageData?)
   public func handleRemoteNotification(userInfo: [Swift.AnyHashable : Any])
   public func userInfoToMessageData(userInfo: [Swift.AnyHashable : Any]) -> LocalzMobileSDK.MessageData?
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers public class BackgroundLocationManager : ObjectiveC.NSObject, CoreLocation.CLLocationManagerDelegate {
   public var lastLocationUpdate: Foundation.Date?
@@ -4325,6 +4355,30 @@ public struct CurrentUser : Swift.Codable, Swift.Hashable {
   }
   public init(from decoder: Swift.Decoder) throws
 }
+public func decode(jwt: Swift.String) throws -> LocalzMobileSDK.JWT
+public struct Claim {
+  public var rawValue: Any? {
+    get
+  }
+  public var string: Swift.String? {
+    get
+  }
+  public var boolean: Swift.Bool? {
+    get
+  }
+  public var double: Swift.Double? {
+    get
+  }
+  public var integer: Swift.Int? {
+    get
+  }
+  public var date: Foundation.Date? {
+    get
+  }
+  public var array: [Swift.String]? {
+    get
+  }
+}
 extension LocalzMobileSDK.PermissionStatus : Swift.Equatable {}
 extension LocalzMobileSDK.PermissionStatus : Swift.Hashable {}
 extension LocalzMobileSDK.PermissionStatus : Swift.RawRepresentable {}
@@ -4333,11 +4387,11 @@ extension LocalzMobileSDK.CapabilityType : Swift.Hashable {}
 extension LocalzMobileSDK.CapabilityType : Swift.RawRepresentable {}
 extension LocalzMobileSDK.Environment : Swift.Equatable {}
 extension LocalzMobileSDK.Environment : Swift.Hashable {}
+extension LocalzMobileSDK.APPTYPE : Swift.Equatable {}
+extension LocalzMobileSDK.APPTYPE : Swift.Hashable {}
 extension LocalzMobileSDK.RLog.Log : Swift.Equatable {}
 extension LocalzMobileSDK.RLog.Log : Swift.Hashable {}
 extension LocalzMobileSDK.RLog.Log : Swift.RawRepresentable {}
-extension LocalzMobileSDK.MobileClient.AppType : Swift.Equatable {}
-extension LocalzMobileSDK.MobileClient.AppType : Swift.Hashable {}
 extension LocalzMobileSDK.MobileClient.SDKState : Swift.Equatable {}
 extension LocalzMobileSDK.MobileClient.SDKState : Swift.Hashable {}
 extension LocalzMobileSDK.MobileClient.SDKOptionKey : Swift.Equatable {}
