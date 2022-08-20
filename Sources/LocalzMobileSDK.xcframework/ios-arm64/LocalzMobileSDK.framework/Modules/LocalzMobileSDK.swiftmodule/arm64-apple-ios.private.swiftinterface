@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7 (swiftlang-5.7.0.123.7 clang-1400.0.29.50)
+// swift-compiler-version: Apple Swift version 5.7 (swiftlang-5.7.0.123.8 clang-1400.0.29.50)
 // swift-module-flags: -target arm64-apple-ios14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LocalzMobileSDK
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import Apollo
@@ -170,8 +170,8 @@ public class MobileClient {
   public init()
   public static func setup(appType: LocalzMobileSDK.APPTYPE = .Both, projectId: Swift.String, attendantKey: Swift.String, pushKey: Swift.String, env: LocalzMobileSDK.Environment = .PRD, options: [LocalzMobileSDK.MobileClient.SDKOptionKey : Any]? = nil) throws
   public static func setup(appType: LocalzMobileSDK.APPTYPE = .Both, key: Swift.String, env: LocalzMobileSDK.Environment = .PRD, options: [LocalzMobileSDK.MobileClient.SDKOptionKey : Any]? = nil) throws
-  public func login(username: Swift.String!, password: Swift.String!, registerDevice: Swift.Bool = true, forceLogout force: Swift.Bool? = true, onSuccess: @escaping ((LocalzMobileSDK.CurrentUser) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void)))
-  public func ssoLogin(provider: LocalzMobileSDK.SSOProviders, idToken: Swift.String? = nil, code: Swift.String? = nil, accessToken: Swift.String? = nil, refreshToken: Swift.String? = nil, force: Swift.Bool? = true, onSuccess: @escaping ((LocalzMobileSDK.CurrentUser) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void)))
+  public func login(username: Swift.String!, password: Swift.String!, registerDevice: Swift.Bool = true, forceLogout force: Swift.Bool = true, onSuccess: @escaping ((LocalzMobileSDK.CurrentUser) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void)))
+  public func ssoLogin(provider: LocalzMobileSDK.SSOProviders, idToken: Swift.String? = nil, code: Swift.String? = nil, accessToken: Swift.String? = nil, refreshToken: Swift.String? = nil, force: Swift.Bool = true, onSuccess: @escaping ((LocalzMobileSDK.CurrentUser) -> (Swift.Void)), onFailure: @escaping ((Swift.Error) -> (Swift.Void)))
   public func logout()
   public func currentUser() -> LocalzMobileSDK.CurrentUser?
   public func deviceId() -> Swift.String?
@@ -434,7 +434,7 @@ public struct GetOrdersInput : Apollo.GraphQLMapConvertible {
 }
 public struct LoginInput : Apollo.GraphQLMapConvertible {
   public var graphQLMap: Apollo.GraphQLMap
-  public init(projectId: Swift.String, cncApiKey: Swift.String, deviceId: Swift.String, username: Swift.String, password: Swift.String, force: Swift.Optional<Swift.Bool?> = nil)
+  public init(projectId: Swift.String, cncApiKey: Swift.String, deviceId: Swift.String, username: Swift.String, password: Swift.String, force: Swift.Bool, branchId: Swift.Optional<Swift.String?> = nil)
   public var projectId: Swift.String {
     get
     set
@@ -455,14 +455,18 @@ public struct LoginInput : Apollo.GraphQLMapConvertible {
     get
     set
   }
-  public var force: Swift.Optional<Swift.Bool?> {
+  public var force: Swift.Bool {
+    get
+    set
+  }
+  public var branchId: Swift.Optional<Swift.String?> {
     get
     set
   }
 }
 public struct LoginSSOInput : Apollo.GraphQLMapConvertible {
   public var graphQLMap: Apollo.GraphQLMap
-  public init(projectId: Swift.String, deviceId: Swift.String, idToken: Swift.Optional<Swift.String?> = nil, provider: LocalzMobileSDK.SSOProviders, code: Swift.Optional<Swift.String?> = nil, redirectUrl: Swift.Optional<Swift.String?> = nil, accessToken: Swift.Optional<Swift.String?> = nil, refreshToken: Swift.Optional<Swift.String?> = nil, force: Swift.Optional<Swift.Bool?> = nil)
+  public init(projectId: Swift.String, deviceId: Swift.String, idToken: Swift.Optional<Swift.String?> = nil, provider: LocalzMobileSDK.SSOProviders, code: Swift.Optional<Swift.String?> = nil, redirectUrl: Swift.Optional<Swift.String?> = nil, accessToken: Swift.Optional<Swift.String?> = nil, refreshToken: Swift.Optional<Swift.String?> = nil, force: Swift.Bool)
   public var projectId: Swift.String {
     get
     set
@@ -495,7 +499,7 @@ public struct LoginSSOInput : Apollo.GraphQLMapConvertible {
     get
     set
   }
-  public var force: Swift.Optional<Swift.Bool?> {
+  public var force: Swift.Bool {
     get
     set
   }
@@ -621,7 +625,7 @@ public struct GetChannelByChannelIdInput : Apollo.GraphQLMapConvertible {
 }
 public struct GetChannelsInput : Apollo.GraphQLMapConvertible {
   public var graphQLMap: Apollo.GraphQLMap
-  public init(limit: Swift.Optional<Swift.Double?> = nil, next: Swift.Optional<Apollo.GraphQLID?> = nil, previous: Swift.Optional<Apollo.GraphQLID?> = nil, asc: Swift.Optional<Swift.Bool?> = nil, dateStart: LocalzMobileSDK.DateTime, dateEnd: LocalzMobileSDK.DateTime, timezone: Swift.String, pageNumber: Swift.Optional<Swift.Double?> = nil, ordersPerPage: Swift.Optional<Swift.Double?> = nil, sortBy: Swift.Optional<LocalzMobileSDK.SortingFields?> = nil, searchBy: Swift.Optional<Swift.String?> = nil, deleted: Swift.Optional<Swift.Bool?> = nil, type: Swift.Optional<Swift.String?> = nil)
+  public init(limit: Swift.Optional<Swift.Double?> = nil, next: Swift.Optional<Apollo.GraphQLID?> = nil, previous: Swift.Optional<Apollo.GraphQLID?> = nil, asc: Swift.Optional<Swift.Bool?> = nil, dateStart: LocalzMobileSDK.DateTime, dateEnd: LocalzMobileSDK.DateTime, timezone: Swift.String, pageNumber: Swift.Optional<Swift.Double?> = nil, ordersPerPage: Swift.Optional<Swift.Double?> = nil, sortBy: Swift.Optional<LocalzMobileSDK.SortingFields?> = nil, searchBy: Swift.Optional<Swift.String?> = nil, deleted: Swift.Optional<Swift.Bool?> = nil, type: Swift.Optional<LocalzMobileSDK.ChatChannelTypes?> = nil)
   public var limit: Swift.Optional<Swift.Double?> {
     get
     set
@@ -670,7 +674,7 @@ public struct GetChannelsInput : Apollo.GraphQLMapConvertible {
     get
     set
   }
-  public var type: Swift.Optional<Swift.String?> {
+  public var type: Swift.Optional<LocalzMobileSDK.ChatChannelTypes?> {
     get
     set
   }
@@ -688,6 +692,22 @@ public enum SortingFields : Swift.RawRepresentable, Swift.Equatable, Swift.Hasha
     get
   }
   public typealias AllCases = [LocalzMobileSDK.SortingFields]
+}
+public enum ChatChannelTypes : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = Swift.String
+  case order
+  case site
+  case siteuser
+  case __unknown(LocalzMobileSDK.ChatChannelTypes.RawValue)
+  public init?(rawValue: LocalzMobileSDK.ChatChannelTypes.RawValue)
+  public var rawValue: LocalzMobileSDK.ChatChannelTypes.RawValue {
+    get
+  }
+  public static func == (lhs: LocalzMobileSDK.ChatChannelTypes, rhs: LocalzMobileSDK.ChatChannelTypes) -> Swift.Bool
+  public static var allCases: [LocalzMobileSDK.ChatChannelTypes] {
+    get
+  }
+  public typealias AllCases = [LocalzMobileSDK.ChatChannelTypes]
 }
 public struct GetMessagesByChannelIdInput : Apollo.GraphQLMapConvertible {
   public var graphQLMap: Apollo.GraphQLMap
@@ -719,12 +739,16 @@ public struct GetMessagesByChannelIdInput : Apollo.GraphQLMapConvertible {
 }
 public struct GetOrderDataInput : Apollo.GraphQLMapConvertible {
   public var graphQLMap: Apollo.GraphQLMap
-  public init(orderNumber: Swift.String, subProjectId: Swift.Optional<Swift.String?> = nil)
+  public init(orderNumber: Swift.String, subProjectId: Swift.Optional<Swift.String?> = nil, deviceId: Swift.Optional<Swift.String?> = nil)
   public var orderNumber: Swift.String {
     get
     set
   }
   public var subProjectId: Swift.Optional<Swift.String?> {
+    get
+    set
+  }
+  public var deviceId: Swift.Optional<Swift.String?> {
     get
     set
   }
@@ -759,8 +783,8 @@ public struct SendLocationInput : Apollo.GraphQLMapConvertible {
 }
 public struct GeoJsonInput : Apollo.GraphQLMapConvertible {
   public var graphQLMap: Apollo.GraphQLMap
-  public init(type: Swift.Optional<Swift.String?> = nil, coordinate: [Swift.Double], altitude: Swift.Double, timestamp: Swift.Double, bearing: Swift.Optional<Swift.Double?> = nil, speed: Swift.Optional<Swift.Double?> = nil, horizontalAccuracy: Swift.Optional<Swift.Double?> = nil, verticalAccuracy: Swift.Optional<Swift.Double?> = nil)
-  public var type: Swift.Optional<Swift.String?> {
+  public init(type: Swift.String, coordinate: [Swift.Double], altitude: Swift.Double, timestamp: Swift.Double, bearing: Swift.Optional<Swift.Double?> = nil, speed: Swift.Optional<Swift.Double?> = nil, horizontalAccuracy: Swift.Optional<Swift.Double?> = nil, verticalAccuracy: Swift.Optional<Swift.Double?> = nil)
+  public var type: Swift.String {
     get
     set
   }
@@ -838,7 +862,7 @@ public struct OnDutyInput : Apollo.GraphQLMapConvertible {
 }
 public struct RegisterDeviceInput : Apollo.GraphQLMapConvertible {
   public var graphQLMap: Apollo.GraphQLMap
-  public init(projectId: Swift.String, cncApiKey: Swift.String, pushApiKey: Swift.String, deviceName: Swift.Optional<Swift.String?> = nil, deviceType: Swift.Optional<Swift.String?> = nil, osType: Swift.String, osVersion: Swift.String, hw: Swift.Optional<LocalzMobileSDK.HardwareInfo?> = nil, lang: Swift.String, locale: Swift.Optional<Swift.String?> = nil, tz: Swift.Optional<Swift.String?> = nil, deviceId: Swift.Optional<Swift.String?> = nil, modules: Swift.Optional<[LocalzMobileSDK.ModuleTypes]?> = nil, appTypes: Swift.Optional<[Swift.String]?> = nil, appId: Swift.Optional<Swift.String?> = nil, appBuild: Swift.Optional<Swift.String?> = nil, appSdk: Swift.Optional<Swift.String?> = nil, appVer: Swift.Optional<Swift.String?> = nil, locEnabled: Swift.Bool, locAuth: Swift.String, bgRefresh: Swift.String, pushToken: Swift.Optional<Swift.String?> = nil, pushTokenEnabled: Swift.Optional<Swift.Bool?> = nil, isSandbox: Swift.Optional<Swift.Bool?> = nil)
+  public init(projectId: Swift.String, cncApiKey: Swift.String, pushApiKey: Swift.String, deviceName: Swift.Optional<Swift.String?> = nil, osType: Swift.String, osVersion: Swift.String, hw: Swift.Optional<LocalzMobileSDK.HardwareInfo?> = nil, lang: Swift.String, locale: Swift.Optional<Swift.String?> = nil, tz: Swift.Optional<Swift.String?> = nil, deviceId: Swift.Optional<Swift.String?> = nil, modules: Swift.Optional<[LocalzMobileSDK.ModuleTypes]?> = nil, appId: Swift.Optional<Swift.String?> = nil, appBuild: Swift.Optional<Swift.String?> = nil, appSdk: Swift.Optional<Swift.String?> = nil, appVer: Swift.Optional<Swift.String?> = nil, locEnabled: Swift.Bool, locAuth: Swift.String, bgRefresh: Swift.String, pushToken: Swift.Optional<Swift.String?> = nil, pushTokenEnabled: Swift.Optional<Swift.Bool?> = nil, isSandbox: Swift.Optional<Swift.Bool?> = nil, socketIoChannel: Swift.Optional<Swift.String?> = nil)
   public var projectId: Swift.String {
     get
     set
@@ -852,10 +876,6 @@ public struct RegisterDeviceInput : Apollo.GraphQLMapConvertible {
     set
   }
   public var deviceName: Swift.Optional<Swift.String?> {
-    get
-    set
-  }
-  public var deviceType: Swift.Optional<Swift.String?> {
     get
     set
   }
@@ -888,10 +908,6 @@ public struct RegisterDeviceInput : Apollo.GraphQLMapConvertible {
     set
   }
   public var modules: Swift.Optional<[LocalzMobileSDK.ModuleTypes]?> {
-    get
-    set
-  }
-  public var appTypes: Swift.Optional<[Swift.String]?> {
     get
     set
   }
@@ -932,6 +948,10 @@ public struct RegisterDeviceInput : Apollo.GraphQLMapConvertible {
     set
   }
   public var isSandbox: Swift.Optional<Swift.Bool?> {
+    get
+    set
+  }
+  public var socketIoChannel: Swift.Optional<Swift.String?> {
     get
     set
   }
@@ -1002,22 +1022,6 @@ public enum OrderStatusTypes : Swift.RawRepresentable, Swift.Equatable, Swift.Ha
     get
   }
   public typealias AllCases = [LocalzMobileSDK.OrderStatusTypes]
-}
-public enum ChatChannelTypes : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
-  public typealias RawValue = Swift.String
-  case order
-  case site
-  case siteuser
-  case __unknown(LocalzMobileSDK.ChatChannelTypes.RawValue)
-  public init?(rawValue: LocalzMobileSDK.ChatChannelTypes.RawValue)
-  public var rawValue: LocalzMobileSDK.ChatChannelTypes.RawValue {
-    get
-  }
-  public static func == (lhs: LocalzMobileSDK.ChatChannelTypes, rhs: LocalzMobileSDK.ChatChannelTypes) -> Swift.Bool
-  public static var allCases: [LocalzMobileSDK.ChatChannelTypes] {
-    get
-  }
-  public typealias AllCases = [LocalzMobileSDK.ChatChannelTypes]
 }
 public enum Resolutions : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = Swift.String
@@ -1232,6 +1236,7 @@ final public class LoginMutation : Apollo.GraphQLMutation {
         get
         set
       }
+      @available(*, deprecated, message: "`use expiresInLong`")
       public var expiresIn: Swift.Double {
         get
         set
@@ -1329,6 +1334,7 @@ final public class LoginSsoMutation : Apollo.GraphQLMutation {
         get
         set
       }
+      @available(*, deprecated, message: "`use expiresInLong`")
       public var expiresIn: Swift.Double {
         get
         set
@@ -1410,6 +1416,7 @@ final public class RefreshTokenMutation : Apollo.GraphQLMutation {
         get
         set
       }
+      @available(*, deprecated, message: "`use expiresInLong`")
       public var expiresIn: Swift.Double {
         get
         set
@@ -2755,6 +2762,7 @@ final public class GetOrderDataQuery : Apollo.GraphQLQuery {
         get
         set
       }
+      @available(*, deprecated, message: "Use `clientAttributes`")
       public var specific: Apollo.JSONObject? {
         get
         set
@@ -2932,6 +2940,7 @@ final public class GetOrdersQuery : Apollo.GraphQLQuery {
     }
     public init(unsafeResultMap: Apollo.ResultMap)
     public init(getOrders: [LocalzMobileSDK.GetOrdersQuery.Data.GetOrder])
+    @available(*, deprecated, message: "Use `getDriverOrders`")
     public var getOrders: [LocalzMobileSDK.GetOrdersQuery.Data.GetOrder] {
       get
       set
@@ -2978,6 +2987,7 @@ final public class GetOrdersQuery : Apollo.GraphQLQuery {
         get
         set
       }
+      @available(*, deprecated, message: "Use `clientAttributes`")
       public var specific: Apollo.JSONObject? {
         get
         set
@@ -3468,6 +3478,7 @@ public struct LoginData : Apollo.GraphQLFragment {
     get
     set
   }
+  @available(*, deprecated, message: "`use expiresInLong`")
   public var expiresIn: Swift.Double {
     get
     set
@@ -3508,6 +3519,7 @@ public struct RefreshTokenData : Apollo.GraphQLFragment {
     get
     set
   }
+  @available(*, deprecated, message: "`use expiresInLong`")
   public var expiresIn: Swift.Double {
     get
     set
@@ -4024,6 +4036,7 @@ public struct OrderData : Apollo.GraphQLFragment {
     get
     set
   }
+  @available(*, deprecated, message: "Use `clientAttributes`")
   public var specific: Apollo.JSONObject? {
     get
     set
